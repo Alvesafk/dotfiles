@@ -1,4 +1,5 @@
 return {
+  {
     "f-person/git-blame.nvim",
     event = "VeryLazy",
     opts = {
@@ -7,4 +8,9 @@ return {
         date_format = "%m-%d-%Y %H:%M:%S", 
         virtual_text_column = 1,  
     },
+  },
+  {
+    "wakatime/vim-wakatime",
+    lazy = false,
+  },
 }
