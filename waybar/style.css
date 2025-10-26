@@ -1,0 +1,107 @@
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background-color: #000D15;
+}
+
+.modules-left, .modules-center, .modules-right {
+  color: white; 
+}
+
+#workspaces button {
+  margin: 2px 4px;
+  padding: 0 8px;
+  padding-right: 12px;
+  background-color: #152630;
+  color: #2393D9;
+}
+
+#workspaces button.active {
+  color: white;
+  background-color: #2BA8D9;
+  transition-duration: 0.5s;
+}
+
+#workspaces button.urgent {
+  background-color: orange;
+  color: white;
+}
+
+#workspaces button:hover {
+  background-color: white;
+  color: #1E4358;
+  transition: ease-in 0.2s ;
+}
+
+#mpris {
+  margin-left: 4px;
+  background-color: transparent;
+}
+
+#clock {
+  background-color: #152630;
+  margin: 2px 0;
+  padding: 0 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#tray {
+  background-color: #152630;
+  margin: 2px 2px;
+  padding: 0 8px;
+  border-radius: 4px;
+}
+
+#network {
+  background-color: #152630;
+  padding: 0 10px;
+  margin: 2px 2px;
+  padding-left: 12px;
+  border-radius: 4px;
+  color: #2393D9;
+}
+
+#network:hover {
+  color: #1E4358;
+  background-color: white;
+  transition: ease-in 0.2s ;
+}
+
+#pulseaudio {
+  background-color: #152630;
+  padding: 0 10px;
+  margin: 2px 2px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: #2393D9;
+}
+
+#pulseaudio:hover {
+  background-color: white;
+  color: #1E4358;
+  transition: ease-in 0.2s ;
+}
+
+#custom-power {
+  background-color: #152630;
+  margin: 2px 2px;
+  margin-right: 12px;
+  padding: 0 10px;
+  padding-right: 14px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #2393D9;
+}
+
+#custom-power:hover {
+  color: #1E4358;
+  background-color: white;
+  transition: ease-in 0.2s ;
+}

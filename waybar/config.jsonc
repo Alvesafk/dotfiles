@@ -1,0 +1,89 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 35,
+  "spacing": 5,
+  "reload_sytle_on_change": true,
+
+  // modules
+
+  "modules-left": [
+    "hyprland/workspaces",
+    "mpris"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "tray",
+    "network",
+    "pulseaudio",
+    "custom/power"
+  ],
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "1": "\uf120",
+      "2": "\uf26b",
+      "3": "\uf1ff",
+      "4": "\uf4d3",
+      "5": "\ue702",
+      "6": "\uf31a"
+    }
+  },
+
+  "mpris": {
+    "format": "{player_icon} {title} - {artist}",
+    "format-paused": "  {title} - {artist}",
+    "format-stopped": " Stopped",
+    "player-icons": {
+      "spotify": " ",
+      "mpd": " ",
+      "firefox": " ",
+      "default": " " 
+    },
+    "ignored-players": ["chromium"],
+    "interval": 2,
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous"
+  },
+
+  "clock": {
+    "format": "{:%H:%M}",
+    "rotate": 0
+  },
+
+  "tray": {
+    "spacing": 8
+  },
+
+  "network": {
+    "tooltip": true,
+    "rotate": 0,
+    "format-ethernet": "\uef44 ",
+    "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>",
+      "format-linked": " {ifname} (No IP)",
+      "format-disconnected": "󰖪 ",
+      "tooltip-format-disconnected": "Disconnected",
+      "format-alt": "<span foreground='#99ffdd'> {bandwidthDownBytes}</span> <span foreground='#ffcc66'> {bandwidthUpBytes}</span>",
+      "interval": 2
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+        "format-muted": "\udb81\udf5f  Muted",
+        "format-icons": ["", "", ""],
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+  },
+
+  "custom/power": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "~/.local/bin/powermenu.sh"
+  }
+
+}
