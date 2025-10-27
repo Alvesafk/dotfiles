@@ -1,4 +1,7 @@
 return {
+  {
+    "CosecSecCot/cosec-twilight.nvim",
+  },
 	{
 		"ellisonleao/gruvbox.nvim",
 		priority = 100,
@@ -27,6 +30,7 @@ return {
 				themes = {
 					{ name = "Gruvbox Dark", colorscheme = "gruvbox" },
 					{ name = "Onedark", colorscheme = "onedark" },
+          { name = "Twilight", colorscheme = "cosec-twilight"},
 				},
 				livePreview = true,
 			})
