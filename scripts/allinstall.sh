@@ -48,9 +48,8 @@ main () {
       echo "The section multilib was NOT ADDED in pacman.conf."
       sleep 2
 
+      sudo pacman -S --noconfirm nvim tmux discord thunderbird firefox kitty
     fi 
-
-    sudo pacman -S --noconfirm nvim tmux discord thunderbird firefox kitty
   fi 
 
   unset secChoice
