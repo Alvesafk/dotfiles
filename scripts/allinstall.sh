@@ -113,7 +113,7 @@ main () {
     echo "Installing the hyprland config."
     sleep 2
 
-    sudo pacman -S --noconfirm hyprland wofi waybar hyprpaper
+    sudo pacman -S --noconfirm hyprland wofi waybar hyprpaper hyprlock
     
     $aur -S --noconfirm jq grim slurp wl-clipboard libnotify hyprpicker 
 
