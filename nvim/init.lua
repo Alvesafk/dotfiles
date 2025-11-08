@@ -26,9 +26,11 @@ vim.lsp.enable("intelephense")
 vim.lsp.enable("html-lsp")
 vim.lsp.enable("css-lsp")
 
+-- php things if it works it works
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.php",
   callback = function ()
     vim.lsp.buf.format()
   end,
 })
+

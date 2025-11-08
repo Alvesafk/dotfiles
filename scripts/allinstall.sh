@@ -126,7 +126,7 @@ main () {
     sleep 2
   fi
 
-  echo "-=- All-install it's finished -=-"
+  echo "-=- All-install is finished -=-"
 }
 
 main
