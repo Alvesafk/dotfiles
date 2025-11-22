@@ -1,6 +1,21 @@
 return {
   {
-    "CosecSecCot/cosec-twilight.nvim",
+    "wnkz/monoglow.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+		config = function()
+			require("monoglow").setup({
+        on_colors = function(colors)
+          colors.glow = "#cc5500"
+        end
+			})
+		end,
+  },
+  {
+    "dasupradyumna/midnight.nvim",
+    lazy = false,
+    priority = 1000
   },
 	{
 		"ellisonleao/gruvbox.nvim",
@@ -30,7 +45,8 @@ return {
 				themes = {
 					{ name = "Gruvbox Dark", colorscheme = "gruvbox" },
 					{ name = "Onedark", colorscheme = "onedark" },
-          { name = "Twilight", colorscheme = "cosec-twilight"},
+          { name = "Midnight", colorscheme = "midnight" },
+          { name = "Monoglow", colorscheme = "monoglow" },
 				},
 				livePreview = true,
 			})

@@ -1,8 +1,11 @@
 {
+
+  // general settings
+
   "layer": "top",
   "position": "top",
   "height": 35,
-  "spacing": 5,
+  "spacing": 0,
   "reload_sytle_on_change": true,
 
   // modules
@@ -18,10 +21,14 @@
     "tray",
     "network",
     "pulseaudio",
+    "cpu",
     "custom/power"
   ],
 
+  // workspaces
+
   "hyprland/workspaces": {
+    "on-click": "activate",
     "format": "{icon}",
     "format-icons": {
       "1": "\uf120",
@@ -31,9 +38,15 @@
       "5": "\uf1b6",
       "6": "\ue702",
       "7": "\uf31a"
+    },
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": []
     }
   },
 
+  // mpris player
   "mpris": {
     "format": "{player_icon} {title} - {artist}",
     "format-paused": "  {title} - {artist}",
@@ -52,8 +65,15 @@
   },
 
   "clock": {
-    "format": "{:%H:%M}",
-    "rotate": 0
+    "format": "{:L%A %H:%M}",
+    "format-alt": "{:L%d %B W%V %Y}",
+    "tooltip": false
+  },
+
+  "cpu": {
+    "interval": 5,
+    "format": " 󰍛 ",
+    "on-click": "exec htop"
   },
 
   "tray": {
@@ -61,15 +81,16 @@
   },
 
   "network": {
-    "tooltip": true,
-    "rotate": 0,
-    "format-ethernet": "\uef44 ",
-    "tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>",
-      "format-linked": " {ifname} (No IP)",
-      "format-disconnected": "󰖪 ",
-      "tooltip-format-disconnected": "Disconnected",
-      "format-alt": "<span foreground='#99ffdd'> {bandwidthDownBytes}</span> <span foreground='#ffcc66'> {bandwidthUpBytes}</span>",
-      "interval": 2
+    "format-icons": ["󰤯", "󰤟", "󰤢","󰤥","󰤨"],
+    "format": " {icon} ",
+    "format-wifi": " {icon} ",
+    "format-ethernet": "󰀂",
+    "format-disconnected": "󰤮",
+    "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-disconnected": "Disconnected",
+    "interval": 3,
+    "spacing": 1
   },
 
   "pulseaudio": {

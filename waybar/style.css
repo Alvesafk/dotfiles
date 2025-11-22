@@ -5,7 +5,8 @@
 }
 
 window#waybar {
-  background-color: #000D15;
+  background-color: transparent;
+  border: 1px solid white;
 }
 
 .modules-left, .modules-center, .modules-right {
@@ -13,95 +14,81 @@ window#waybar {
 }
 
 #workspaces button {
-  margin: 2px 4px;
-  padding: 0 8px;
-  padding-right: 12px;
-  background-color: #152630;
-  color: #2393D9;
+  padding: 0 4px;
+  padding-right: 8px;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 0;
+  color: #FFF;
 }
 
 #workspaces button.active {
-  color: white;
-  background-color: #2BA8D9;
-  transition-duration: 0.5s;
+  color: black;
+  background-color: #FFF;
 }
 
 #workspaces button.urgent {
-  background-color: orange;
+  background-color: #cc5500;
   color: white;
 }
 
-#workspaces button:hover {
-  background-color: white;
-  color: #1E4358;
-  transition: ease-in 0.2s ;
-}
-
 #mpris {
-  margin-left: 4px;
+  font-size: 12px;
+  margin-left: 8px;
   background-color: transparent;
 }
 
 #clock {
-  background-color: #152630;
-  margin: 2px 0;
+  background-color: transparent;
+  margin: 0;
   padding: 0 8px;
-  border-radius: 4px;
   font-size: 14px;
   font-weight: bold;
 }
 
 #tray {
-  background-color: #152630;
-  margin: 2px 2px;
+  background-color: transparent;
   padding: 0 8px;
-  border-radius: 4px;
+  border: 1px solid white;
 }
 
 #network {
-  background-color: #152630;
-  padding: 0 10px;
-  margin: 2px 2px;
-  padding-left: 12px;
-  border-radius: 4px;
-  color: #2393D9;
-}
-
-#network:hover {
-  color: #1E4358;
-  background-color: white;
-  transition: ease-in 0.2s ;
+  border: 1px solid white;
+  font-size: 15px;
+  background-color: transparent;
+  padding: 0 12px;
+  padding-right: 14;
+  color: white;
 }
 
 #pulseaudio {
-  background-color: #152630;
+  border: 1px solid white;
+  background-color: transparent;
   padding: 0 10px;
-  margin: 2px 2px;
-  border-radius: 4px;
   font-weight: bold;
-  color: #2393D9;
+  color: white;
 }
 
-#pulseaudio:hover {
-  background-color: white;
-  color: #1E4358;
-  transition: ease-in 0.2s ;
+#cpu {
+  border: 1px solid white;
+  background-color: transparent;
+  padding: 0 4px;
+  font-size: 15px;
+  padding-right: 6px;
+  color: white;
 }
-
 #custom-power {
-  background-color: #152630;
-  margin: 2px 2px;
-  margin-right: 12px;
+  background-color: transparent;
+  margin: 0;
   padding: 0 10px;
   padding-right: 14px;
   border-radius: 4px;
   font-weight: bold;
   font-size: 14px;
-  color: #2393D9;
+  color: white;
 }
 
 #custom-power:hover {
-  color: #1E4358;
+  color: black;
   background-color: white;
-  transition: ease-in 0.2s ;
 }
