@@ -6,9 +6,6 @@ set PATH $PATH:/home/afk/.local/bin/
 
 # Aliases 
 
-alias fortunetiger=nvim
-alias vim=nvim
-alias v=nvim
 alias c=clear
 alias e=exit
 alias phps="php -S localhost:8000"

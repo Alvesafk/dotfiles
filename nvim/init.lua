@@ -20,11 +20,11 @@ vim.lsp.enable("lua_ls")
 vim.lsp.enable("rust_analyzer")
 vim.lsp.enable("pyright")
 vim.lsp.enable("bash-language-server")
-vim.lsp.enable("biome")
 vim.lsp.enable("csharp-language-server")
 vim.lsp.enable("intelephense")
 vim.lsp.enable("html-lsp")
 vim.lsp.enable("css-lsp")
+vim.lsp.enable("typescript-language-server")
 
 -- php things if it works it works
 vim.api.nvim_create_autocmd("BufWritePre", {
