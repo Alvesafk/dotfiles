@@ -1,0 +1,47 @@
+/**
+ * rofi -dump-theme output.
+ * Rofi version: 2.0.0
+ **/
+* {
+    background-color: Black;
+    border-color:     White;
+    font:             "BigBlueTerm437 Nerd Font Mono 12";
+    text-color:       White;
+}
+window {
+    width:    100.0000% ;
+    padding:  8px ;
+    anchor:   south;
+    location: south;
+    children: [ "horibox" ];
+    border: 1px;
+    border-color: White;
+}
+horibox {
+    orientation: horizontal;
+    children:    [ "prompt","entry","listview" ];
+}
+listview {
+    layout:  horizontal;
+    spacing: 5px ;
+    lines:   100;
+}
+entry {
+    width:  10.0000em ;
+    expand: false;
+}
+element {
+    padding: 0px 2px ;
+}
+element selected {
+    background-color: White;
+    text-color: Black;
+}
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+}
+element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+}
