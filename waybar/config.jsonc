@@ -1,110 +1,55 @@
 {
-  // general settings
-
   "layer": "top",
   "position": "top",
-  "height": 35,
-  "spacing": 0,
-  "reload_sytle_on_change": true,
-
-  // modules
-
-  "modules-left": [
-    "hyprland/workspaces",
-    "mpris"
-  ],
-  "modules-center": [
-    "clock"
-  ],
-  "modules-right": [
-    "tray",
-    "network",
-    "pulseaudio",
-    "cpu",
-    "custom/power"
-  ],
-
-  // workspaces
-
+  "height": 30,
+  "spacing": 4,
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": ["pulseaudio", "cpu", "memory"],
+  
   "hyprland/workspaces": {
-    "on-click": "activate",
     "format": "{icon}",
+    "on-click": "activate",
     "format-icons": {
-      "1": "\uf120",
-      "2": "\uf26b",
-      "3": "\uf1ff",
-      "4": "\uf4d3",
-      "5": "\uf1b6",
-      "6": "\ue702",
-      "7": "\uf31a"
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "10",
+      "active": "",
+      "default": ""
     },
     "persistent-workspaces": {
-      "1": [],
-      "2": [],
-      "3": []
+      "*": 3
     }
   },
-
-  // mpris player
-  "mpris": {
-    "format": "{player_icon} {title} - {artist}",
-    "format-paused": "  {title} - {artist}",
-    "format-stopped": " Stopped",
-    "player-icons": {
-      "spotify": " ",
-      "mpd": " ",
-      "firefox": " ",
-      "default": " " 
-    },
-    "ignored-players": ["chromium"],
-    "interval": 2,
-    "on-click": "playerctl play-pause",
-    "on-scroll-up": "playerctl next",
-    "on-scroll-down": "playerctl previous"
-  },
-
+  
   "clock": {
-    "format": "{:L%A %H:%M}",
-    "format-alt": "{:L%d %B W%V %Y}",
-    "tooltip": false
+    "format": " {:%A, %d, %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>"
   },
-
-  "cpu": {
-    "interval": 5,
-    "format": " 󰍛 ",
-    "on-click": "exec htop"
-  },
-
-  "tray": {
-    "spacing": 8
-  },
-
-  "network": {
-    "format-icons": ["󰤯", "󰤟", "󰤢","󰤥","󰤨"],
-    "format": " {icon} ",
-    "format-wifi": " {icon} ",
-    "format-ethernet": "󰀂",
-    "format-disconnected": "󰤮",
-    "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-    "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-    "tooltip-format-disconnected": "Disconnected",
-    "interval": 3,
-    "spacing": 1
-  },
-
+  
   "pulseaudio": {
-    "format": "{icon} {volume}%",
-        "format-muted": "\udb81\udf5f  Muted",
-        "format-icons": ["", "", ""],
-        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-        "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
-        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    "format": "  {volume}%",
+    "format-muted": "󰖁 {volume}%",
+    "on-click": "pavucontrol"
   },
-
-  "custom/power": {
-    "format": "",
-    "tooltip": false,
-    "on-click": "~/.local/bin/powermenu.sh"
+  
+  "cpu": {
+    "format": "{icon} {usage}%",
+      "format-icons": ["󰍛"],
+    "tooltip": true,
+    "interval": 2
+  },
+  
+  "memory": {
+    "format": "\udb80\udf5b {percentage}%",
+    "tooltip-format": "RAM: {used:0.1f}GB / {total:0.1f}GB",
+    "interval": 2
   }
-
 }

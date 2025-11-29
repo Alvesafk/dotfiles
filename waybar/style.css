@@ -1,95 +1,71 @@
 * {
-  font-family: "BigBlueTerm437 Nerd Font Mono";
-  font-size: 13px;
+  font-family: 'JetBrainsMono Nerd Font';
+  font-size: 14px;
+  min-height: 0;
 }
 
 window#waybar {
   background-color: transparent;
-  border: 1px solid white;
 }
 
-.modules-left, .modules-center, .modules-right {
-  color: white; 
+#workspaces {
+  background-color: #333399;
+  margin: 2px 0 0 5px;
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 0 5px;
 }
 
 #workspaces button {
-  padding: 0 4px;
-  background-color: transparent;
-  border: 1px solid white;
-  border-radius: 0;
-  color: #FFF;
-  font-family: "JetBrainsMono Nerd Font";
-  font-size: 29px;
+  padding-right: 13px;
+  transition: ease-in 0.2s;
+  margin: 0;
+  padding: 5px 8px;
 }
 
 #workspaces button.active {
-  color: black;
-  background-color: #FFF;
+  border-bottom: 3px solid #abbcda;
+  border-radius: 0;
+  margin: 0;
+  padding: 5px 8px;
 }
 
 #workspaces button.urgent {
-  background-color: #cc5500;
-  color: white;
-}
-
-#mpris {
-  font-size: 12px;
-  margin-left: 8px;
-  background-color: transparent;
+  border-bottom: 3px solid #C50;
+  border-radius: 0;
+  margin: 0;
+  padding: 5px 8px;
 }
 
 #clock {
-  background-color: transparent;
-  margin: 0;
-  padding: 0 8px;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-#tray {
-  background-color: transparent;
-  padding: 0 8px;
-  border: 1px solid white;
-}
-
-#network {
-  border: 1px solid white;
-  font-size: 15px;
-  background-color: transparent;
-  padding: 0 12px;
-  padding-right: 14;
-  color: white;
+  background-color: #abbcda;
+  color: #000;
+  margin: 2px 0;
+  padding: 0 10px 0 5px;
+  border-radius: 10px;
 }
 
 #pulseaudio {
-  border: 1px solid white;
-  background-color: transparent;
-  padding: 0 10px;
-  font-weight: bold;
-  color: white;
-  font-size: 12px;
+  background-color: #f0bf3f;
+  color: #000;
+  margin: 2px 3px;
+  padding: 0 10px 0 5px;
+  border-radius: 10px;
 }
 
 #cpu {
-  border: 1px solid white;
-  background-color: transparent;
-  padding: 0 4px;
-  font-size: 15px;
-  padding-right: 6px;
-  color: white;
-}
-#custom-power {
-  background-color: transparent;
-  margin: 0;
-  padding: 0 10px;
-  padding-right: 14px;
-  border-radius: 4px;
-  font-weight: bold;
-  font-size: 14px;
-  color: white;
+  background-color: #609f7f;
+  color: #000;
+  margin: 2px 3px;
+  padding: 0 10px 0 5px;
+  border-radius: 10px;
 }
 
-#custom-power:hover {
-  color: black;
-  background-color: white;
+#memory {
+  background-color: #D95945;
+  color: #000;
+  margin: 2px 3px;
+  margin-right: 5px;
+  padding: 0 10px 0 5px;
+  border-radius: 10px;
 }
