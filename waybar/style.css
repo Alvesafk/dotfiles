@@ -27,7 +27,7 @@ window#waybar {
   border-bottom: 3px solid #abbcda;
   border-radius: 0;
   margin: 0;
-  padding: 5px 8px;
+  padding: 5px 12px 2px 8px;
 }
 
 #workspaces button.urgent {
@@ -35,6 +35,21 @@ window#waybar {
   border-radius: 0;
   margin: 0;
   padding: 5px 8px;
+}
+
+#workspaces button:hover {
+  border-top: 3px solid #abbcda;
+  border-radius: 0;
+  margin: 0;
+  padding: 2px 8px;
+}
+
+#tray {
+  background-color: #015099;
+  color: #000;
+  margin: 2px 3px;
+  padding: 0 8px;
+  border-radius: 10px;
 }
 
 #clock {
@@ -65,7 +80,21 @@ window#waybar {
   background-color: #D95945;
   color: #000;
   margin: 2px 3px;
-  margin-right: 5px;
   padding: 0 10px 0 5px;
   border-radius: 10px;
+}
+
+#custom-power {
+  background-color: #333399;
+  color: #FFF;
+  margin: 2px 3px;
+  margin-right: 5px;
+  padding: 0 15px 0 10px;
+  border-radius: 10px;
+}
+
+#custom-power:hover {
+  background-color: #abbcda;
+  color: #000;
+  transition: ease-in 0.25s;
 }

@@ -1,6 +1,8 @@
 configuration {
   modes: [ combi ];
   combi-modes: [ window, drun, run ];
+  show-icons: false;
+  sidebar-mode: false;
 }
 
-@theme "~/.config/rofi/dmenu_2.rasi"
+@theme "~/.config/rofi/glass_theme.rasi"

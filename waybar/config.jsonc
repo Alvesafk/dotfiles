@@ -3,13 +3,14 @@
   "position": "top",
   "height": 30,
   "spacing": 4,
-  "modules-left": ["hyprland/workspaces"],
+
+  "modules-left": ["hyprland/workspaces", "tray"],
   "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "cpu", "memory"],
+  "modules-right": ["pulseaudio", "cpu", "memory", "custom/power"],
   
   "hyprland/workspaces": {
     "format": "{icon}",
-    "on-click": "activate",
+    "on-click": "kitty fastfetch",
     "format-icons": {
       "1": "1",
       "2": "2",
@@ -29,27 +30,40 @@
     }
   },
   
+  "tray": {
+    "spacing": 5
+  },
+
   "clock": {
     "format": " {:%A, %d, %H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>"
   },
-  
+
   "pulseaudio": {
     "format": "  {volume}%",
-    "format-muted": "󰖁 {volume}%",
-    "on-click": "pavucontrol"
+    "format-muted": "  {volume}%",
+    "on-click": "pavucontrol",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   },
   
   "cpu": {
     "format": "{icon} {usage}%",
       "format-icons": ["󰍛"],
     "tooltip": true,
-    "interval": 2
+    "interval": 2,
+    "on-click": "kitty btop"
   },
   
   "memory": {
-    "format": "\udb80\udf5b {percentage}%",
+    "format": " {percentage}%",
     "tooltip-format": "RAM: {used:0.1f}GB / {total:0.1f}GB",
-    "interval": 2
+    "interval": 2,
+    "on-click": "kitty btop"
+  },
+
+  "custom/power": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "kitty ~/first-party/scripts/shutdown.sh"
   }
 }
