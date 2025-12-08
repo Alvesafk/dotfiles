@@ -1,22 +1,22 @@
 return {
-  {
-    "wnkz/monoglow.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
+	{
+		"wnkz/monoglow.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {},
 		config = function()
 			require("monoglow").setup({
-        on_colors = function(colors)
-          colors.glow = "#cc5500"
-        end
+				on_colors = function(colors)
+					colors.glow = "#cc5500"
+				end,
 			})
 		end,
-  },
-  {
-    "dasupradyumna/midnight.nvim",
-    lazy = false,
-    priority = 1000
-  },
+	},
+	{
+		"dasupradyumna/midnight.nvim",
+		lazy = false,
+		priority = 1000,
+	},
 	{
 		"ellisonleao/gruvbox.nvim",
 		priority = 100,
@@ -45,8 +45,8 @@ return {
 				themes = {
 					{ name = "Gruvbox Dark", colorscheme = "gruvbox" },
 					{ name = "Onedark", colorscheme = "onedark" },
-          { name = "Midnight", colorscheme = "midnight" },
-          { name = "Monoglow", colorscheme = "monoglow" },
+					{ name = "Midnight", colorscheme = "midnight" },
+					{ name = "Monoglow", colorscheme = "monoglow" },
 				},
 				livePreview = true,
 			})

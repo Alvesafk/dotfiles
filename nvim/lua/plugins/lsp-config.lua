@@ -12,7 +12,6 @@ return {
 				ensure_installed = {
 					"pyright",
 					"rust_analyzer",
-					"biome",
 					"clangd",
 					"intelephense",
 					"stylua",
