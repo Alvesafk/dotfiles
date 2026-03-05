@@ -98,9 +98,16 @@ local function pick_centered(picker)
 end
 
 -- visual stuff
-function coloring(color)
-	color = color or "gruvbox"
-	vim.cmd("colorscheme gruvbox")
+function coloring(data)
+	local color
+
+	if type(data) == 'table' then
+		color = (data.args ~= '') and data.args or "gruvbox"
+	else
+		color = data or "gruvbox"
+	end
+
+	vim.cmd("colorscheme " .. color)
 	vim.cmd(":hi statusline guibg=NONE")
 
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -109,7 +116,7 @@ end
 
 coloring()
 
-vim.api.nvim_create_user_command('Coloring', coloring, {})
+vim.api.nvim_create_user_command('Coloring', coloring, {nargs = "?", complete = 'color'})
 
 -- lsp enableingi
 vim.lsp.enable({ "lua_ls", "clangd", "rust_analyzer", "pyright", "bashls", "html", "cssls", "ts_ls" })
