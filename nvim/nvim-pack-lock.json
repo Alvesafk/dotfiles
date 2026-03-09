@@ -16,6 +16,10 @@
       "rev": "572f5660cf05f8cd8834e096d7b4c921ba18e175",
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
+    "gruvbox.nvim": {
+      "rev": "561126520034a1dac2f78ab063db025d12555998",
+      "src": "https://github.com/ellisonleao/gruvbox.nvim"
+    },
     "mini.files": {
       "rev": "26baa6215c2e5c40ba7fe82685d827fe8e5c68c8",
       "src": "https://github.com/echasnovski/mini.files"
@@ -47,6 +51,10 @@
     "oil.nvim": {
       "rev": "cbcb3f997f6f261c577b943ec94e4ef55108dd95",
       "src": "https://github.com/stevearc/oil.nvim"
+    },
+    "tokyonight.nvim": {
+      "rev": "5da1b76e64daf4c5d410f06bcb6b9cb640da7dfd",
+      "src": "https://github.com/folke/tokyonight.nvim"
     }
   }
 }
