@@ -137,13 +137,15 @@ local map = vim.keymap.set
 map('n', '<leader>o', ':source<CR>')
 map('n', '<leader>w', ':write<CR>')
 map('n', '<leader>q', ':exit<CR>')
+map('n', '<leader>tm', ':terminal<CR>')
+
 map('n', '<leader>lf', vim.lsp.buf.format)
 map('n', '<leader>ca', vim.lsp.buf.code_action)
 map('n', '<leader>ff', function() pick_centered('files') end)
 map('n', '<leader>fg', function() pick_centered('grep') end)
 map('n', '<leader>e', ':lua MiniFiles.open()<CR>')
 
-map('n', '<leader>t', ':Coloring<CR>')
+map('n', '<leader>tt', ':Coloring<CR>')
 
 map({ 'n', 'v', 'x' }, '<leader>y', '"+y')
 map({ 'n', 'v', 'x' }, '<leader>d', '"+d')
