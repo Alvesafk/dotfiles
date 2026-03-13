@@ -20,6 +20,10 @@
       "rev": "561126520034a1dac2f78ab063db025d12555998",
       "src": "https://github.com/ellisonleao/gruvbox.nvim"
     },
+    "indent-blankline.nvim": {
+      "rev": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03",
+      "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
+    },
     "mini.files": {
       "rev": "26baa6215c2e5c40ba7fe82685d827fe8e5c68c8",
       "src": "https://github.com/echasnovski/mini.files"

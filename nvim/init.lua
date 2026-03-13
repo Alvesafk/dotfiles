@@ -29,6 +29,7 @@ vim.pack.add({
 	{ src = "https://github.com/mattn/emmet-vim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/norcalli/nvim-colorizer.lua" },
+	{ src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
 })
 
 -- requiring you love
@@ -79,6 +80,8 @@ require('colorizer').setup({
 	},
 })
 
+require("ibl").setup()
+
 -- function!!!!
 local function pick_centered(picker)
 	local height = math.floor(0.6 * vim.o.lines)
@@ -117,7 +120,7 @@ end
 
 coloring()
 
-vim.api.nvim_create_user_command('Coloring', coloring, {nargs = "?", complete = 'color'})
+vim.api.nvim_create_user_command('Coloring', coloring, { nargs = "?", complete = 'color' })
 
 -- lsp enableingi
 vim.lsp.enable({ "lua_ls", "clangd", "rust_analyzer", "pyright", "bashls", "html", "cssls", "ts_ls" })
@@ -144,6 +147,7 @@ map('n', '<leader>ca', vim.lsp.buf.code_action)
 map('n', '<leader>ff', function() pick_centered('files') end)
 map('n', '<leader>fg', function() pick_centered('grep') end)
 map('n', '<leader>e', ':lua MiniFiles.open()<CR>')
+map('n', '<leader>ti', ':IBLToggle<CR>')
 
 map('n', '<leader>tt', ':Coloring<CR>')
 
