@@ -33,17 +33,19 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
-  { src = "https://github.com/nvim-neo-tree/neo-tree.nvim" },
-  { src = "https://github.com/MunifTanjim/nui.nvim" },
-  { src = "https://github.com/antosha417/nvim-lsp-file-operations" },
-  { src = "https://github.com/folke/snacks.nvim" },
-  { src = "https://github.com/nvim-lualine/lualine.nvim" },
+	{ src = "https://github.com/nvim-neo-tree/neo-tree.nvim" },
+	{ src = "https://github.com/MunifTanjim/nui.nvim" },
+	{ src = "https://github.com/antosha417/nvim-lsp-file-operations" },
+	{ src = "https://github.com/folke/snacks.nvim" },
+	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 })
 
 -- requiring you love
 require "telescope".setup()
 require("neo-tree").setup({
-  close_if_last_window = false,  
+	close_if_last_window = false,
+	enable_git_status = true,
+	enable_diagnostics = true,
 })
 
 require('lualine').setup()
@@ -88,7 +90,7 @@ require('colorizer').setup({
 		RRGGBBAA = true,
 		rgb_fn = true,
 		hsl_fn = true,
-		mode = "background",
+		mode = "foreground",
 	},
 })
 
@@ -131,22 +133,26 @@ vim.lsp.config("lua_ls", {
 local map = vim.keymap.set
 local builtin = require('telescope.builtin')
 
+-- vim functions
 map('n', '<leader>o', ':source<CR>')
 map('n', '<leader>w', ':write<CR>')
 map('n', '<leader>q', ':exit<CR>')
 map('n', '<leader>tm', ':terminal<CR>')
+map('n', '<leader>no', ':noh<CR>')
 
+map({ 'n', 'v', 'x' }, '<leader>y', '"+y')
+map({ 'n', 'v', 'x' }, '<leader>d', '"+d')
+
+-- plugins functions
 map('n', '<leader>lf', vim.lsp.buf.format)
 map('n', '<leader>ca', vim.lsp.buf.code_action)
 map('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 map('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-map('n', '<leader>e', ':Neotree<CR>')
+map('n', '<leader>e', ':Neotree float<CR>')
 map('n', '<leader>ti', ':IBLToggle<CR>')
 
+-- own functions
 map('n', '<leader>tt', ':Coloring<CR>')
-
-map({ 'n', 'v', 'x' }, '<leader>y', '"+y')
-map({ 'n', 'v', 'x' }, '<leader>d', '"+d')
 
 -- vim.g.user_emmet_leader_key = ','
 -- map('i', '<C-y>,', '<plug>(emmet-expand-abbr)')
