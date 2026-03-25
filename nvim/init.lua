@@ -38,6 +38,7 @@ vim.pack.add({
 	{ src = "https://github.com/antosha417/nvim-lsp-file-operations" },
 	{ src = "https://github.com/folke/snacks.nvim" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
+  { src = "https://github.com/akinsho/toggleterm.nvim" },
 })
 
 -- requiring you love
@@ -95,6 +96,7 @@ require('colorizer').setup({
 })
 
 require("ibl").setup()
+require("toggleterm").setup()
 
 -- visual stuff
 function coloring(data)
@@ -137,7 +139,7 @@ local builtin = require('telescope.builtin')
 map('n', '<leader>o', ':source<CR>')
 map('n', '<leader>w', ':write<CR>')
 map('n', '<leader>q', ':exit<CR>')
-map('n', '<leader>tm', ':terminal<CR>')
+map('n', '<leader>tm', ':ToggleTerm direction=float name=@io<CR>')
 map('n', '<leader>no', ':noh<CR>')
 
 map({ 'n', 'v', 'x' }, '<leader>y', '"+y')
