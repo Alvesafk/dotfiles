@@ -14,6 +14,7 @@ vim.o.smartindent = true
 vim.o.termguicolors = true
 vim.o.undofile = true
 vim.o.incsearch = true
+vim.o.cursorline = true
 
 -- vim built in package manager!!! so cooolll
 -- { src = "https://github.com//" },
