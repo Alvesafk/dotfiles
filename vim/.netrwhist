@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/home/afk'
+let g:netrw_dirhist_2='/home/afk/first-party/studies/rust/hello_world/src'
+let g:netrw_dirhist_1='/home/afk/first-party/studies/rust/hello_world'
+let g:netrw_dirhist_0='/home/afk/first-party/studies/pyright/rdn'
+let g:netrw_dirhist_9='/home/afk/first-party/studies/pyright'
+let g:netrw_dirhist_8='/home/afk/first-party/studies/pyright/rdn'
+let g:netrw_dirhist_7='/home/afk/.vim'
+let g:netrw_dirhist_6='/home/afk/first-party/studies/pyright/rdn'
+let g:netrw_dirhist_5='/home/afk/.vim'
+let g:netrw_dirhist_4='/home/afk/first-party/studies/pyright/rdn'

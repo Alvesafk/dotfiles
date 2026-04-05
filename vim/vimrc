@@ -1,0 +1,17 @@
+" vim plug for plugins
+
+call plug#begin()
+
+Plug 'ghifarit53/tokyonight-vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'yegappan/lsp'
+
+call plug#end()
+
+" sourcing config files
+source ~/.vim/options.vim
+source ~/.vim/keybinds.vim
+source ~/.vim/colors.vim
+source ~/.vim/lsp.vim
