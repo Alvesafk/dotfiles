@@ -39,7 +39,9 @@ vim.pack.add({
 	{ src = "https://github.com/antosha417/nvim-lsp-file-operations" },
 	{ src = "https://github.com/folke/snacks.nvim" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
-  { src = "https://github.com/akinsho/toggleterm.nvim" },
+	{ src = "https://github.com/akinsho/toggleterm.nvim" },
+	{ src = "https://github.com/m4xshen/hardtime.nvim" },
+	{ src = "https://github.com/brianhuster/live-preview.nvim"}
 })
 
 -- requiring you love
@@ -54,8 +56,8 @@ require('lualine').setup()
 
 require("luasnip.loaders.from_vscode").lazy_load()
 require('blink.cmp').setup({
-	keymap = {
-		preset = 'default', -- 'default' | 'super-tab' | 'enter'
+  keymap = {
+	preset = 'default', 
 		['<C-space>'] = { 'show', 'hide' },
 		['<C-e>'] = { 'hide' },
 		['<CR>'] = { 'accept', 'fallback' },
@@ -63,17 +65,23 @@ require('blink.cmp').setup({
 		['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
 		['<C-k>'] = { 'select_prev', 'fallback' },
 		['<C-j>'] = { 'select_next', 'fallback' },
-	},
-	appearance = {
-		use_nvim_cmp_as_default = false,
-		nerd_font_variant = 'mono'
-	},
-	sources = {
-		default = { 'lsp', 'path', 'snippets', 'buffer', },
-	},
-	snippets = {
-		preset = 'luasnip',
-	},
+  },
+
+  appearance = {
+    nerd_font_variant = 'mono'
+  },
+
+  completion = {
+    documentation = { auto_show = false }
+  },
+
+  sources = {
+    default = { 'lsp', 'path', 'snippets', 'buffer' },
+  },
+
+  fuzzy = {
+    implementation = "lua"
+  }
 })
 
 require('nvim-treesitter.configs').setup({
@@ -98,6 +106,7 @@ require('colorizer').setup({
 
 require("ibl").setup()
 require("toggleterm").setup()
+require("hardtime").setup()
 
 -- visual stuff
 function coloring(data)
@@ -121,7 +130,7 @@ coloring()
 vim.api.nvim_create_user_command('Coloring', coloring, { nargs = "?", complete = 'color' })
 
 -- lsp enableingi
-vim.lsp.enable({ "lua_ls", "clangd", "rust_analyzer", "pyright", "bashls", "html", "cssls", "ts_ls" })
+vim.lsp.enable({ "lua_ls", "clangd", "rust_analyzer", "pyright", "bashls", "html", "cssls", "ts_ls", "gopls", })
 vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {

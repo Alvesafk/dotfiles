@@ -22,8 +22,20 @@ alias gpl='git pull'
 alias gps='git push'
 alias glog='git log --oneline --graph'
 
-alias vim='nvim'
+alias vi='vi'
 
 alias ls='lsd --color never'
+alias lsl='lsd --color never -l'
 alias grep='grep --color=auto'
-PS1='[\u@\h \W]\$ '
+
+alias p3='python3'
+alias ve='source .venv/bin/activate'
+alias pge="python manage.py"
+
+PROMPT_COMMAND='PS1_CMD1=$(git branch --show-current 2>/dev/null)'; PS1='\u@\h \W ${PS1_CMD1}\n\$ '
+
+export TERM=xterm-256color
+
+export GTK_IM_MODULE=simple
+
+export PATH="$HOME/.cargo/bin:$PATH"
