@@ -2,12 +2,8 @@
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.wrap = true
-vim.o.tabstop = 4
-vim.o.softtabstop = 4
-vim.o.shiftwidth = 4
 vim.o.swapfile = false
 vim.g.mapleader = " "
-vim.o.winborder = "rounded"
 vim.o.cursorcolumn = false
 vim.o.ignorecase = true
 vim.o.smartindent = true
@@ -16,12 +12,16 @@ vim.o.undofile = true
 vim.o.incsearch = true
 vim.o.cursorline = true
 
+local initColorScheme = "material-deep-ocean"
+
 -- vim built in package manager!!! so cooolll
 -- { src = "https://github.com//" },
 vim.pack.add({
 	{ src = "https://github.com/wnkz/monoglow.nvim" },
 	{ src = "https://github.com/ellisonleao/gruvbox.nvim" },
+	{ src = "https://github.com/oskarnurm/koda.nvim" },
 	{ src = "https://github.com/folke/tokyonight.nvim" },
+	{ src = "https://github.com/marko-cerovac/material.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/Saghen/blink.cmp" },
 	{ src = "https://github.com/L3MON4D3/LuaSnip" },
@@ -40,8 +40,11 @@ vim.pack.add({
 	{ src = "https://github.com/folke/snacks.nvim" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	{ src = "https://github.com/akinsho/toggleterm.nvim" },
-	{ src = "https://github.com/m4xshen/hardtime.nvim" },
-	{ src = "https://github.com/brianhuster/live-preview.nvim"}
+	{ src = "https://github.com/brianhuster/live-preview.nvim"},
+	{ src = "https://github.com/nvim-mini/mini.tabline" },
+	{ src = "https://github.com/nvim-mini/mini.animate" },
+	{ src = "https://github.com/f-person/git-blame.nvim" },
+	{ src = "https://github.com/wakatime/vim-wakatime" },
 })
 
 -- requiring you love
@@ -106,28 +109,59 @@ require('colorizer').setup({
 
 require("ibl").setup()
 require("toggleterm").setup()
-require("hardtime").setup()
+require("koda").setup()
+require("mini.tabline").setup()
+require("mini.animate").setup()
 
 -- visual stuff
+local saved_hl = nil
+local transparent = false
+
 function coloring(data)
 	local color
 
 	if type(data) == 'table' then
-		color = (data.args ~= '') and data.args or "gruvbox"
+		color = (data.args ~= '') and data.args or initColorScheme
 	else
-		color = data or "gruvbox"
+		color = data or initColorScheme
 	end
 
 	vim.cmd("colorscheme " .. color)
 	vim.cmd(":hi statusline guibg=NONE")
 
+	saved_hl = vim.api.nvim_get_hl(0, { name = "Normal", link = false })
+	transparent = true
+
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
-coloring()
+local function toggleTransparency()
+	if not transparent then
+		saved_hl = vim.api.nvim_get_hl(0, { name = "Normal", link = false })
+
+		local without_bg = vim.tbl_extend("force", saved_hl, { bg = "none" })
+		vim.api.nvim_set_hl(0, "Normal", without_bg)
+		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+		transparent = true
+	else
+		if saved_hl then
+			vim.api.nvim_set_hl(0, "Normal", saved_hl)
+		end
+		transparent = false
+	end
+end
+
+vim.cmd("colorscheme " .. initColorScheme)
 
 vim.api.nvim_create_user_command('Coloring', coloring, { nargs = "?", complete = 'color' })
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+	callback = function()
+		saved_hl = nil
+		transparent = false
+	end,
+})
 
 -- lsp enableingi
 vim.lsp.enable({ "lua_ls", "clangd", "rust_analyzer", "pyright", "bashls", "html", "cssls", "ts_ls", "gopls", })
@@ -163,8 +197,12 @@ map('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 map('n', '<leader>e', ':Neotree float<CR>')
 map('n', '<leader>ti', ':IBLToggle<CR>')
 
--- own functions
+-- own functions maps
 map('n', '<leader>tt', ':Coloring<CR>')
+map('n', '<leader>tp', toggleTransparency)
 
 -- vim.g.user_emmet_leader_key = ','
 -- map('i', '<C-y>,', '<plug>(emmet-expand-abbr)')
+
+-- init custom functions calls 
+coloring()
