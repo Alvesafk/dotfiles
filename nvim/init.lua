@@ -1,4 +1,7 @@
--- vim config
+-- super ultra mega nvim 0.12+ config 
+-- alvesafk
+
+-- vim variables
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.wrap = true
@@ -11,8 +14,10 @@ vim.o.termguicolors = true
 vim.o.undofile = true
 vim.o.incsearch = true
 vim.o.cursorline = true
+vim.o.updatetime = 100
 
-local initColorScheme = "material-deep-ocean"
+-- colorscheme that nvim initiates with
+local initColorScheme = "gruvbox"
 
 -- vim built in package manager!!! so cooolll
 -- { src = "https://github.com//" },
@@ -24,6 +29,7 @@ vim.pack.add({
 	{ src = "https://github.com/marko-cerovac/material.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/Saghen/blink.cmp" },
+	{ src = "https://github.com/Saghen/blink.lib" },
 	{ src = "https://github.com/L3MON4D3/LuaSnip" },
 	{ src = "https://github.com/rafamadriz/friendly-snippets" },
 	{ src = "https://github.com/mattn/emmet-vim" },
@@ -40,27 +46,31 @@ vim.pack.add({
 	{ src = "https://github.com/folke/snacks.nvim" },
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	{ src = "https://github.com/akinsho/toggleterm.nvim" },
-	{ src = "https://github.com/brianhuster/live-preview.nvim"},
+	{ src = "https://github.com/brianhuster/live-preview.nvim" },
 	{ src = "https://github.com/nvim-mini/mini.tabline" },
-	{ src = "https://github.com/nvim-mini/mini.animate" },
+	{ src = "https://github.com/sphamba/smear-cursor.nvim" },
 	{ src = "https://github.com/f-person/git-blame.nvim" },
 	{ src = "https://github.com/wakatime/vim-wakatime" },
+	{ src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim" },
 })
 
 -- requiring you love
+-- utils
 require "telescope".setup()
+
 require("neo-tree").setup({
 	close_if_last_window = false,
 	enable_git_status = true,
 	enable_diagnostics = true,
 })
 
-require('lualine').setup()
-
 require("luasnip.loaders.from_vscode").lazy_load()
-require('blink.cmp').setup({
-  keymap = {
-	preset = 'default', 
+
+local cmp = require('blink.cmp')
+cmp.build():wait(60000)
+cmp.setup({
+	keymap = {
+		preset = 'default',
 		['<C-space>'] = { 'show', 'hide' },
 		['<C-e>'] = { 'hide' },
 		['<CR>'] = { 'accept', 'fallback' },
@@ -68,31 +78,43 @@ require('blink.cmp').setup({
 		['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
 		['<C-k>'] = { 'select_prev', 'fallback' },
 		['<C-j>'] = { 'select_next', 'fallback' },
-  },
+	},
 
-  appearance = {
-    nerd_font_variant = 'mono'
-  },
+	appearance = {
+		nerd_font_variant = 'mono'
+	},
 
-  completion = {
-    documentation = { auto_show = false }
-  },
+	completion = {
+		documentation = { auto_show = false }
+	},
 
-  sources = {
-    default = { 'lsp', 'path', 'snippets', 'buffer' },
-  },
+	sources = {
+		default = { 'lsp', 'path', 'snippets', 'buffer' },
+	},
 
-  fuzzy = {
-    implementation = "lua"
-  }
+	fuzzy = {
+		implementation = "rust"
+	}
 })
 
-require('nvim-treesitter.configs').setup({
-	ensure_installed = { "c", "lua", "vim", "vimdoc", "python", "rust", "javascript", "html", "css" },
-	sync_install = false,
-	auto_install = true,
-	highlight = { enable = true },
+require("tiny-inline-diagnostic").setup({
+	preset = "ghost",
+	transpare_bg = true,
+	options = {
+		multilines = {
+			enabled = true,
+			always_show = true,
+			trim_whitespaces = true,
+		}
+	}
 })
+
+require('nvim-treesitter').setup()
+
+require("toggleterm").setup()
+
+-- themes
+require('lualine').setup()
 
 require('colorizer').setup({
 	filetypes = { "css", "javascript", "html" },
@@ -106,17 +128,33 @@ require('colorizer').setup({
 		mode = "foreground",
 	},
 })
-
-require("ibl").setup()
-require("toggleterm").setup()
 require("koda").setup()
-require("mini.tabline").setup()
-require("mini.animate").setup()
 
+require("mini.tabline").setup()
+
+require("smear_cursor").setup({
+	stiffness = 0.8,
+	trailing_stiffness = 0.6,
+	stiffness_insert_mode = 0.7,
+	trailing_stiffness_insert_mode = 0.7,
+	damping = 0.95,
+	damping_insert_mode = 0.95,
+	distance_stop_animating = 0.5,
+})
+
+-- donnow actually
+require("ibl").setup()
+
+-- end of requires!
+
+-- custom functions
 -- visual stuff
 local saved_hl = nil
 local transparent = false
 
+-- main theme function, it can change to the default colorscheme and activate
+-- transparency, or be used as a function on command line with a colorscheme
+-- that you want
 function coloring(data)
 	local color
 
@@ -136,6 +174,7 @@ function coloring(data)
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
+-- a toggle transparency function
 local function toggleTransparency()
 	if not transparent then
 		saved_hl = vim.api.nvim_get_hl(0, { name = "Normal", link = false })
@@ -156,11 +195,33 @@ vim.cmd("colorscheme " .. initColorScheme)
 
 vim.api.nvim_create_user_command('Coloring', coloring, { nargs = "?", complete = 'color' })
 
+-- custom autocmds because they killed ma boy, RIP treesitter.configs...
+-- autocmd to disable transparency when changing colorscheme
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
 		saved_hl = nil
 		transparent = false
 	end,
+})
+
+-- autocmd to activate indentation of treesitter
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function ()
+		pcall(vim.treesitter.start)
+		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+	end,
+})
+
+-- autocmd to auto install treesitter language thingies
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function ()
+		local lang = vim.bo.filetype
+		local installed = require("nvim-treesitter.config").get_installed()
+		if not vim.tbl_contains(installed, lang) and lang ~= "neo-tree" then
+			require("nvim-treesitter").install({ lang })
+		end
+		pcall(vim.treesitter.start)
+	end
 })
 
 -- lsp enableingi
@@ -179,7 +240,7 @@ vim.lsp.config("lua_ls", {
 local map = vim.keymap.set
 local builtin = require('telescope.builtin')
 
--- vim functions
+-- vim keymap functions
 map('n', '<leader>o', ':source<CR>')
 map('n', '<leader>w', ':write<CR>')
 map('n', '<leader>q', ':exit<CR>')
@@ -189,7 +250,7 @@ map('n', '<leader>no', ':noh<CR>')
 map({ 'n', 'v', 'x' }, '<leader>y', '"+y')
 map({ 'n', 'v', 'x' }, '<leader>d', '"+d')
 
--- plugins functions
+-- plugins keymap functions
 map('n', '<leader>lf', vim.lsp.buf.format)
 map('n', '<leader>ca', vim.lsp.buf.code_action)
 map('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
@@ -201,8 +262,5 @@ map('n', '<leader>ti', ':IBLToggle<CR>')
 map('n', '<leader>tt', ':Coloring<CR>')
 map('n', '<leader>tp', toggleTransparency)
 
--- vim.g.user_emmet_leader_key = ','
--- map('i', '<C-y>,', '<plug>(emmet-expand-abbr)')
-
--- init custom functions calls 
+-- init custom functions calls
 coloring()
