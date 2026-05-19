@@ -17,7 +17,7 @@ vim.o.cursorline = true
 vim.o.updatetime = 100
 
 -- colorscheme that nvim initiates with
-local initColorScheme = "gruvbox"
+local initColorScheme = "tokyonight-night"
 
 -- vim built in package manager!!! so cooolll
 -- { src = "https://github.com//" },
@@ -50,7 +50,7 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-mini/mini.tabline" },
 	{ src = "https://github.com/sphamba/smear-cursor.nvim" },
 	{ src = "https://github.com/f-person/git-blame.nvim" },
-	{ src = "https://github.com/wakatime/vim-wakatime" },
+	--{ src = "https://github.com/wakatime/vim-wakatime" },
 	{ src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim" },
 })
 
@@ -133,13 +133,18 @@ require("koda").setup()
 require("mini.tabline").setup()
 
 require("smear_cursor").setup({
-	stiffness = 0.8,
-	trailing_stiffness = 0.6,
-	stiffness_insert_mode = 0.7,
-	trailing_stiffness_insert_mode = 0.7,
-	damping = 0.95,
-	damping_insert_mode = 0.95,
-	distance_stop_animating = 0.5,
+	cursor_color = "#ffffff",
+	
+	never_draw_over_target = true,
+
+	smear_insert_mode = false,
+	min_vertical_distance_smear = 2,
+	min_horizontal_distance_smear = 2,
+
+	time_interval = 17,
+	stiffness = 0.9,
+	trailing_sitffness = 0.4,
+	damping = 0.99,
 })
 
 -- donnow actually
@@ -213,11 +218,16 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- autocmd to auto install treesitter language thingies
+local ignored_langs = {
+	["neo-tree"] = true,
+	["toggleterm"] = true,
+}
+
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function ()
 		local lang = vim.bo.filetype
 		local installed = require("nvim-treesitter.config").get_installed()
-		if not vim.tbl_contains(installed, lang) and lang ~= "neo-tree" then
+		if not vim.tbl_contains(installed, lang) and not ignored_langs[lang] then
 			require("nvim-treesitter").install({ lang })
 		end
 		pcall(vim.treesitter.start)
@@ -257,6 +267,7 @@ map('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 map('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 map('n', '<leader>e', ':Neotree float<CR>')
 map('n', '<leader>ti', ':IBLToggle<CR>')
+map('n', '<leader>gb', ':GitBlameToggle<CR>')
 
 -- own functions maps
 map('n', '<leader>tt', ':Coloring<CR>')
