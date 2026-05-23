@@ -36,6 +36,10 @@
       "rev": "ff7ea32c2002ee18032629122f8232fc97e5ccb3",
       "src": "https://github.com/oskarnurm/koda.nvim"
     },
+    "lackluster.nvim": {
+      "rev": "70dd682e564784893b984deb51dd5ddd263c8cc7",
+      "src": "https://github.com/slugbyte/lackluster.nvim"
+    },
     "live-preview.nvim": {
       "rev": "c1fcf75c5f9c9c01dd392852de44204b60f1b5b1",
       "src": "https://github.com/brianhuster/live-preview.nvim"

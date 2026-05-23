@@ -17,7 +17,7 @@ vim.o.cursorline = true
 vim.o.updatetime = 100
 
 -- colorscheme that nvim initiates with
-local initColorScheme = "tokyonight-night"
+local initColorScheme = "koda-dark"
 
 -- vim built in package manager!!! so cooolll
 -- { src = "https://github.com//" },
@@ -27,6 +27,7 @@ vim.pack.add({
 	{ src = "https://github.com/oskarnurm/koda.nvim" },
 	{ src = "https://github.com/folke/tokyonight.nvim" },
 	{ src = "https://github.com/marko-cerovac/material.nvim" },
+	{ src = "https://github.com/slugbyte/lackluster.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/Saghen/blink.cmp" },
 	{ src = "https://github.com/Saghen/blink.lib" },
@@ -62,6 +63,14 @@ require("neo-tree").setup({
 	close_if_last_window = false,
 	enable_git_status = true,
 	enable_diagnostics = true,
+
+	filesystem = {
+		filtered_items = {
+			visible = true,
+			hide_dotfiles = false,
+			hide_gitignored = false,
+		},
+	},
 })
 
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -221,6 +230,7 @@ vim.api.nvim_create_autocmd("FileType", {
 local ignored_langs = {
 	["neo-tree"] = true,
 	["toggleterm"] = true,
+	["sh"] = true,
 }
 
 vim.api.nvim_create_autocmd("FileType", {
