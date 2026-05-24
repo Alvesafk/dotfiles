@@ -1,20 +1,60 @@
--- super ultra mega nvim 0.12+ config 
+-- super ultra mega nvim 0.12+ config
 -- alvesafk
 
 -- vim variables
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.wrap = true
+vim.o.wrap = false
 vim.o.swapfile = false
 vim.g.mapleader = " "
 vim.o.cursorcolumn = false
 vim.o.ignorecase = true
 vim.o.smartindent = true
+vim.o.autoindent = true
 vim.o.termguicolors = true
 vim.o.undofile = true
 vim.o.incsearch = true
 vim.o.cursorline = true
 vim.o.updatetime = 100
+vim.o.scrolloff = 10
+vim.o.sidescrolloff = 10
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.hlsearch = true
+vim.o.incsearch = true
+vim.o.signcolumn = "yes"
+vim.o.showmatch = true
+vim.o.cmdheight = 1
+vim.o.pumheight = 10
+vim.o.pumblend = 10
+vim.o.winblend = 0
+vim.o.conceallevel = 0
+vim.o.concealcursor = ""
+vim.o.lazyredraw = true
+vim.o.synmaxcol = 300
+
+local undodir = vim.fn.expand("~/.vim/undodir")
+if vim.fn.isdirectory(undodir) == 0 then
+	vim.fn.mkdir(undodir, "p")
+end
+
+vim.o.backup = false
+vim.o.writebackup = false
+vim.o.undofile = true
+vim.o.undodir = undodir
+vim.o.updatetime = 300
+vim.o.timeoutlen = 500
+vim.o.ttimeoutlen = 0
+vim.o.autoread = true
+vim.o.autowrite = false
+
+vim.o.hidden = true
+vim.o.errorbells = false
+vim.o.backspace = "indent,eol,start"
+vim.o.autochdir = false
+vim.o.mouse = "a"
+vim.o.modifiable = true
+vim.o.encoding = "UTF-8"
 
 -- colorscheme that nvim initiates with
 local initColorScheme = "koda-dark"
@@ -143,7 +183,7 @@ require("mini.tabline").setup()
 
 require("smear_cursor").setup({
 	cursor_color = "#ffffff",
-	
+
 	never_draw_over_target = true,
 
 	smear_insert_mode = false,
@@ -220,7 +260,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
 -- autocmd to activate indentation of treesitter
 vim.api.nvim_create_autocmd("FileType", {
-	callback = function ()
+	callback = function()
 		pcall(vim.treesitter.start)
 		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 	end,
@@ -234,7 +274,7 @@ local ignored_langs = {
 }
 
 vim.api.nvim_create_autocmd("FileType", {
-	callback = function ()
+	callback = function()
 		local lang = vim.bo.filetype
 		local installed = require("nvim-treesitter.config").get_installed()
 		if not vim.tbl_contains(installed, lang) and not ignored_langs[lang] then
@@ -245,7 +285,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- lsp enableingi
-vim.lsp.enable({ "lua_ls", "clangd", "rust_analyzer", "pyright", "bashls", "html", "cssls", "ts_ls", "gopls", })
+vim.lsp.enable({ "lua_ls", "clangd", "rust_analyzer", "pyright", "bashls", "html", "cssls", "ts_ls", "gopls", "qmlls6" })
 vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
