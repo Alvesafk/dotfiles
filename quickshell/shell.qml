@@ -23,7 +23,13 @@ ShellRoot {
 
             PwObjectTracker {
                 id: sinkTracker
-                objects: [Pipewire.defaultAudioSink]
+                objects: Pipewire.defaultAudioSink ? [Pipewire.defaultAudioSink] : []
+            }
+
+            Component.onCompleted: {
+                if (Pipewire.defaultAudioSink)
+                    sinkTracker.objects = [Pipewire.defaultAudioSink]
+                updateFocusedProcess()
             }
 
             property var defaultSink: sinkTracker.objects[0]
@@ -44,6 +50,49 @@ ShellRoot {
             property var lastCpuTotal: 0
 
             property string fontFamily: "JetBrainsMono Nerd Font"
+            
+            property string currentProcessDisplay: ""
+
+		Process {
+		    id: inspectProc
+		    command: ["bash", "-c", "active_pid=$(hyprctl activewindow -j | jq '.pid'); if [ ! -z \"$active_pid\" ] && [ \"$active_pid\" -gt 0 ]; then current_pid=$active_pid; while true; do child_pid=$(pgrep -P $current_pid | tail -n 1); if [ -z \"$child_pid\" ]; then break; fi; current_pid=$child_pid; done; if [ \"$current_pid\" != \"$active_pid\" ]; then ps -o comm= -p $current_pid 2>/dev/null; fi; fi"]
+		    stdout: SplitParser {
+			onRead: data => {
+			    if (!data) return
+			    var proc = data.trim()
+			    
+			    if (proc && proc !== "bash" && proc !== "zsh" && proc !== "fish" && proc !== "sudo") {
+				currentProcessDisplay = proc === "nvim" ? "Neovim" : proc
+			    } else {
+				currentProcessDisplay = Hyprland.activeToplevel ? Hyprland.activeToplevel.title : ""
+			    }
+			}
+		    }
+		}
+            Connections {
+                target: Hyprland
+                function onActiveToplevelChanged() {
+                    updateFocusedProcess()
+                }
+            }
+
+            function updateFocusedProcess() {
+                var win = Hyprland.activeToplevel
+                if (!win) {
+                    currentProcessDisplay = ""
+                    return
+                }
+
+                var appId = (win.appId ?? "").toLowerCase()
+                var winClass = (win.className ?? "").toLowerCase()
+
+                if (appId === "alacritty" || appId === "kitty" || appId === "foot" || appId === "wezterm" || appId === "ghostty" ||
+                    winClass === "alacritty" || winClass === "kitty" || winClass === "foot") {
+                    inspectProc.running = true
+                } else {
+                    currentProcessDisplay = win.title ?? ""
+                }
+            }
 
             Process {
                 id: cpuProc
@@ -137,6 +186,19 @@ ShellRoot {
                     }
                 }
 
+                Rectangle {
+                    width: 1; height: 16; color: "#333333"
+                    Layout.alignment: Qt.AlignVCenter
+                }
+
+                Text {
+                    text: currentProcessDisplay
+                    color: "#9f9f9f"
+                    font { pixelSize: 12; family: fontFamily }
+                    elide: Text.ElideRight
+                    Layout.maximumWidth: 300
+                }
+
                 Item { Layout.fillWidth: true }
 
                 Repeater {
@@ -175,7 +237,7 @@ ShellRoot {
                     Layout.alignment: Qt.AlignVCenter
 
                     Text {
-                        text: "  CPU " + cpuUsage + "%"
+                        text: " CPU " + cpuUsage + "%"
                         color: cpuUsage > 80 ? "#ff5555" : cpuUsage > 50 ? "#ffb86c" : "#9f9f9f"
                         font { pixelSize: 12; bold: true; family: fontFamily }
                     }
@@ -183,7 +245,7 @@ ShellRoot {
                     Rectangle { width: 1; height: 16; color: "#333333" }
 
                     Text {
-                        text: "  RAM " + ramUsage + "%"
+                        text: " RAM " + ramUsage + "%"
                         color: ramUsage > 80 ? "#ff5555" : ramUsage > 50 ? "#ffb86c" : "#9f9f9f"
                         font { pixelSize: 12; bold: true; family: fontFamily }
                     }
@@ -191,7 +253,7 @@ ShellRoot {
                     Rectangle { width: 1; height: 16; color: "#333333" }
 
                     Text {
-                        text: "  DSK " + diskUsage + "%"
+                        text: " DSK " + diskUsage + "%"
                         color: diskUsage > 80 ? "#ff5555" : diskUsage > 50 ? "#ffb86c" : "#9f9f9f"
                         font { pixelSize: 12; bold: true; family: fontFamily }
                     }
