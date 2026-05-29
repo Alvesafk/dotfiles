@@ -93,6 +93,7 @@ vim.pack.add({
 	{ src = "https://github.com/f-person/git-blame.nvim" },
 	--{ src = "https://github.com/wakatime/vim-wakatime" },
 	{ src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim" },
+	{ src = "https://github.com/goolord/alpha-nvim" },
 })
 
 -- requiring you love
@@ -163,7 +164,7 @@ require('nvim-treesitter').setup()
 require("toggleterm").setup()
 
 -- themes
-require('lualine').setup()
+require('lualine').setup({})
 
 require('colorizer').setup({
 	filetypes = { "css", "javascript", "html" },
@@ -196,7 +197,33 @@ require("smear_cursor").setup({
 	damping = 0.99,
 })
 
--- donnow actually
+local alpha = require("alpha")
+local dashboard = require("alpha.themes.dashboard")
+
+dashboard.section.header.val = {
+[[                                                                     ]],
+[[       ███████████           █████      ██                     ]],
+[[      ███████████             █████                             ]],
+[[      ████████████████ ███████████ ███   ███████     ]],
+[[     ████████████████ ████████████ █████ ██████████████   ]],
+[[    █████████████████████████████ █████ █████ ████ █████   ]],
+[[  ██████████████████████████████████ █████ █████ ████ █████  ]],
+[[ ██████  ███ █████████████████ ████ █████ █████ ████ ██████ ]],
+[[ ██████   ██  ███████████████   ██ █████████████████ ]],
+[[ ██████   ██  ███████████████   ██ █████████████████ ]],
+}
+
+dashboard.section.buttons.val = {
+  dashboard.button("e", "  > New File", "<cmd>ene<CR>"),
+  dashboard.button("f", "  > Find file", "<cmd>Telescope find_files<CR>"),
+  dashboard.button("CTRL N", "  > Toggle file explorer", "<cmd>Neotree float<CR>"),
+  dashboard.button("SPC ff", "󰱼  > Find File", "<cmd>Telescope find_files<CR>"),
+  dashboard.button("SPC fw", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
+  dashboard.button("q", "  > Quit NVIM", "<cmd>qa<CR>"),
+}
+
+alpha.setup(dashboard.opts)
+
 require("ibl").setup()
 
 -- end of requires!
@@ -209,7 +236,7 @@ local transparent = false
 -- main theme function, it can change to the default colorscheme and activate
 -- transparency, or be used as a function on command line with a colorscheme
 -- that you want
-function coloring(data)
+local function coloring(data)
 	local color
 
 	if type(data) == 'table' then
@@ -269,8 +296,11 @@ vim.api.nvim_create_autocmd("FileType", {
 -- autocmd to auto install treesitter language thingies
 local ignored_langs = {
 	["neo-tree"] = true,
+	["neo-tree-popup"] = true,
 	["toggleterm"] = true,
 	["sh"] = true,
+	["alpha"] = true,
+	["blink-cmp-menu"] = true,
 }
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -283,6 +313,8 @@ vim.api.nvim_create_autocmd("FileType", {
 		pcall(vim.treesitter.start)
 	end
 })
+
+vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
 
 -- lsp enableingi
 vim.lsp.enable({ "lua_ls", "clangd", "rust_analyzer", "pyright", "bashls", "html", "cssls", "ts_ls", "gopls", "qmlls6" })
@@ -307,6 +339,10 @@ map('n', '<leader>q', ':exit<CR>')
 map('n', '<leader>tm', ':ToggleTerm direction=float name=@io<CR>')
 map('n', '<leader>no', ':noh<CR>')
 
+vim.keymap.set("n", "<leader>tw", function()
+  vim.wo.wrap = not vim.wo.wrap
+end, { desc = "Toggle wrap" })
+
 map({ 'n', 'v', 'x' }, '<leader>y', '"+y')
 map({ 'n', 'v', 'x' }, '<leader>d', '"+d')
 
@@ -322,6 +358,14 @@ map('n', '<leader>gb', ':GitBlameToggle<CR>')
 -- own functions maps
 map('n', '<leader>tt', ':Coloring<CR>')
 map('n', '<leader>tp', toggleTransparency)
+
+map("n", "j", function()
+	return vim.v.count == 0 and "gj" or "j"
+end, { expr = true, silent = true })
+
+map("n", "k", function()
+	return vim.v.count == 0 and "gk" or "k"
+end, { expr = true, silent = true })
 
 -- init custom functions calls
 coloring()
