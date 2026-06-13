@@ -30,7 +30,6 @@ vim.o.pumblend = 10
 vim.o.winblend = 0
 vim.o.conceallevel = 0
 vim.o.concealcursor = ""
-vim.o.lazyredraw = true
 vim.o.synmaxcol = 300
 
 local undodir = vim.fn.expand("~/.vim/undodir")
@@ -75,7 +74,7 @@ vim.pack.add({
 	{ src = "https://github.com/rafamadriz/friendly-snippets" },
 	{ src = "https://github.com/mattn/emmet-vim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-	{ src = "https://github.com/norcalli/nvim-colorizer.lua" },
+	{ src = "https://github.com/catgoose/nvim-colorizer.lua" },
 	{ src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim" },
@@ -94,10 +93,16 @@ vim.pack.add({
 	--{ src = "https://github.com/wakatime/vim-wakatime" },
 	{ src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim" },
 	{ src = "https://github.com/goolord/alpha-nvim" },
+	{ src = "https://github.com/folke/noice.nvim" },
+	{ src = "https://github.com/rcarriga/nvim-notify" },
 })
 
 -- requiring you love
 -- utils
+require("notify").setup({
+	background_color = "#000000",
+})
+
 require "telescope".setup()
 
 require("neo-tree").setup({
@@ -112,6 +117,16 @@ require("neo-tree").setup({
 			hide_gitignored = false,
 		},
 	},
+})
+
+require("noice").setup({
+	presets = {
+		bottom_search = true,
+		command_palette = true,
+		long_message_to_split = true,
+		inc_renme = false,
+		lsp_doc_border = false,
+	}
 })
 
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -163,12 +178,17 @@ require('nvim-treesitter').setup()
 
 require("toggleterm").setup()
 
+require("gitblame").setup({
+	enabled = true,
+	message_template = "  <author> :: <date>",
+})
+
 -- themes
 require('lualine').setup({})
 
 require('colorizer').setup({
 	filetypes = { "css", "javascript", "html" },
-	user_default_options = {
+	options = {
 		names = true,
 		RGB = true,
 		RRGGBB = true,
@@ -216,10 +236,10 @@ dashboard.section.header.val = {
 dashboard.section.buttons.val = {
   dashboard.button("e", "  > New File", "<cmd>ene<CR>"),
   dashboard.button("f", "  > Find file", "<cmd>Telescope find_files<CR>"),
-  dashboard.button("CTRL N", "  > Toggle file explorer", "<cmd>Neotree float<CR>"),
+  dashboard.button("SPC e", "  > Toggle file explorer", "<cmd>Neotree float<CR>"),
   dashboard.button("SPC ff", "󰱼  > Find File", "<cmd>Telescope find_files<CR>"),
-  dashboard.button("SPC fw", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
-  dashboard.button("q", "  > Quit NVIM", "<cmd>qa<CR>"),
+  dashboard.button("SPC fg", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
+  dashboard.button("SPC q", "  > Quit NVIM", "<cmd>qa<CR>"),
 }
 
 alpha.setup(dashboard.opts)
@@ -301,6 +321,11 @@ local ignored_langs = {
 	["sh"] = true,
 	["alpha"] = true,
 	["blink-cmp-menu"] = true,
+	["notify"] = true,
+	["noice"] = true,
+	["checkhealth"] = true,
+	["TelescopePrompt"] = true,
+	["TelescopeResults"] = true,
 }
 
 vim.api.nvim_create_autocmd("FileType", {
@@ -314,10 +339,23 @@ vim.api.nvim_create_autocmd("FileType", {
 	end
 })
 
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("config.lsp", { clear = true }),
+	callback = function(args)
+		local map = function(lhs, rhs)
+			vim.keymap.set("n", lhs, rhs, { buffer = args.buf })
+		end
+
+		map("<leader>gd", vim.lsp.buf.definition)
+		map("<leader>gD", vim.lsp.buf.declaration)
+		map("<leader>gi", vim.lsp.buf.implementation)
+	end
+})
+
 vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
 
 -- lsp enableingi
-vim.lsp.enable({ "lua_ls", "clangd", "rust_analyzer", "pyright", "bashls", "html", "cssls", "ts_ls", "gopls", "qmlls6" })
+vim.lsp.enable({ "lua_ls", "clangd", "rust_analyzer", "pyright", "bashls", "html", "cssls", "ts_ls", "gopls", })
 vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
