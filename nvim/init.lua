@@ -100,7 +100,7 @@ vim.pack.add({
 -- requiring you love
 -- utils
 require("notify").setup({
-	background_color = "#000000",
+	background_colour = "#000000",
 })
 
 require "telescope".setup()
@@ -221,25 +221,25 @@ local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
 
 dashboard.section.header.val = {
-[[                                                                     ]],
-[[       ███████████           █████      ██                     ]],
-[[      ███████████             █████                             ]],
-[[      ████████████████ ███████████ ███   ███████     ]],
-[[     ████████████████ ████████████ █████ ██████████████   ]],
-[[    █████████████████████████████ █████ █████ ████ █████   ]],
-[[  ██████████████████████████████████ █████ █████ ████ █████  ]],
-[[ ██████  ███ █████████████████ ████ █████ █████ ████ ██████ ]],
-[[ ██████   ██  ███████████████   ██ █████████████████ ]],
-[[ ██████   ██  ███████████████   ██ █████████████████ ]],
+	[[                                                                     ]],
+	[[       ███████████           █████      ██                     ]],
+	[[      ███████████             █████                             ]],
+	[[      ████████████████ ███████████ ███   ███████     ]],
+	[[     ████████████████ ████████████ █████ ██████████████   ]],
+	[[    █████████████████████████████ █████ █████ ████ █████   ]],
+	[[  ██████████████████████████████████ █████ █████ ████ █████  ]],
+	[[ ██████  ███ █████████████████ ████ █████ █████ ████ ██████ ]],
+	[[ ██████   ██  ███████████████   ██ █████████████████ ]],
+	[[ ██████   ██  ███████████████   ██ █████████████████ ]],
 }
 
 dashboard.section.buttons.val = {
-  dashboard.button("e", "  > New File", "<cmd>ene<CR>"),
-  dashboard.button("f", "  > Find file", "<cmd>Telescope find_files<CR>"),
-  dashboard.button("SPC e", "  > Toggle file explorer", "<cmd>Neotree float<CR>"),
-  dashboard.button("SPC ff", "󰱼  > Find File", "<cmd>Telescope find_files<CR>"),
-  dashboard.button("SPC fg", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
-  dashboard.button("SPC q", "  > Quit NVIM", "<cmd>qa<CR>"),
+	dashboard.button("e", "  > New File", "<cmd>ene<CR>"),
+	dashboard.button("f", "  > Find file", "<cmd>Telescope find_files<CR>"),
+	dashboard.button("SPC e", "  > Toggle file explorer", "<cmd>Neotree float<CR>"),
+	dashboard.button("SPC ff", "󰱼  > Find File", "<cmd>Telescope find_files<CR>"),
+	dashboard.button("SPC fg", "  > Find Word", "<cmd>Telescope live_grep<CR>"),
+	dashboard.button("SPC q", "  > Quit NVIM", "<cmd>qa<CR>"),
 }
 
 alpha.setup(dashboard.opts)
@@ -352,6 +352,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end
 })
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*",
+	command = [[%s/\s\*$//e]],
+})
+
 vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
 
 -- lsp enableingi
@@ -378,7 +383,7 @@ map('n', '<leader>tm', ':ToggleTerm direction=float name=@io<CR>')
 map('n', '<leader>no', ':noh<CR>')
 
 vim.keymap.set("n", "<leader>tw", function()
-  vim.wo.wrap = not vim.wo.wrap
+	vim.wo.wrap = not vim.wo.wrap
 end, { desc = "Toggle wrap" })
 
 map({ 'n', 'v', 'x' }, '<leader>y', '"+y')
