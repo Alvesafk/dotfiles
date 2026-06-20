@@ -53,3 +53,7 @@ source "$ZDOTDIR/plugins.zsh"
 
 # prompt
 source "$ZDOTDIR/prompt.zsh"
+
+# programs specific stugg
+source "$ZDOTDIR/programs.zsh"
+

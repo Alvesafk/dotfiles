@@ -29,6 +29,7 @@ ShellRoot {
             Component.onCompleted: {
                 if (Pipewire.defaultAudioSink)
                     sinkTracker.objects = [Pipewire.defaultAudioSink]
+                // Garante uma checagem inicial ao carregar a barra
                 updateFocusedProcess()
             }
 

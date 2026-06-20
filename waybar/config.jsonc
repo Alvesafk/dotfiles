@@ -6,7 +6,7 @@
 
   "modules-left": ["hyprland/workspaces", "tray"],
   "modules-center": ["clock"],
-  "modules-right": ["pulseaudio", "cpu", "memory", "custom/power"],
+  "modules-right": ["pulseaudio", "disk", "cpu", "memory", "custom/power"],
   
   "hyprland/workspaces": {
     "format": "{icon}",
@@ -22,12 +22,13 @@
       "8": "8",
       "9": "9",
       "10": "10",
-      "active": "",
       "default": ""
     },
     "persistent-workspaces": {
-      "*": 3
-    }
+      "*": [1, 2, 3, 4]
+    },
+
+    "all-outputs": true,
   },
   
   "tray": {
@@ -46,6 +47,13 @@
     "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   },
   
+  "disk": {
+    "format": " {percentage_used}%",
+    "tooltip-format": "Disk: {used:0.1f}GB / {total:0.1f}GB",
+    "interval": 2,
+    "on-click": "dolphin"
+  },
+
   "cpu": {
     "format": "{icon} {usage}%",
       "format-icons": ["󰍛"],
@@ -55,7 +63,7 @@
   },
   
   "memory": {
-    "format": " {percentage}%",
+    "format": "  {percentage}%",
     "tooltip-format": "RAM: {used:0.1f}GB / {total:0.1f}GB",
     "interval": 2,
     "on-click": "kitty btop"
@@ -64,6 +72,6 @@
   "custom/power": {
     "format": "",
     "tooltip": false,
-    "on-click": "kitty ~/first-party/scripts/shutdown.sh"
+    "on-click": "/home/afk/.config/rofi/applets/bin/powermenu.sh"
   }
 }

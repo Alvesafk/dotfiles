@@ -56,7 +56,7 @@ vim.o.modifiable = true
 vim.o.encoding = "UTF-8"
 
 -- colorscheme that nvim initiates with
-local initColorScheme = "koda-dark"
+local initColorScheme = "gruvbox"
 
 -- vim built in package manager!!! so cooolll
 -- { src = "https://github.com//" },

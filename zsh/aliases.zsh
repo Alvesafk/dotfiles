@@ -3,15 +3,15 @@ alias so="source $ZDOTDIR/.zshrc"
 alias c="clear"
 alias e="exit"
 
-alias ls="eza --icons --colour=never"
-alias ll="eza -lh --icons --git --colour=never"
-alias la="eza -lah --icons --git --colour=never"
-alias tree="eza --tree --icons --colour=never"
+alias ls="eza --icons"
+alias ll="eza -lh --icons --git"
+alias la="eza -lah --icons --git"
+alias tree="eza --tree --icons"
 
 compdef eza=ls
 
-alias grep="rg --color=never"
-alias diff="diff --color=never"
+alias grep="rg"
+alias diff="diff"
 alias df="df -h"
 
 # dev aliases
