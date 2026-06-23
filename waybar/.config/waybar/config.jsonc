@@ -1,0 +1,106 @@
+{
+	"layer": "top",
+	"position": "top",
+	"height": 30,
+	"spacing": 4,
+
+	"modules-left": ["hyprland/workspaces", "group/media"],
+	"modules-right": ["tray", "pulseaudio", "disk", "cpu", "memory", "clock", "network"],
+
+	"hyprland/workspaces": {
+		"format": "{icon}",
+		"format-icons": {
+			"1": "1",
+			"2": "2",
+			"3": "3",
+			"4": "4",
+			"5": "5",
+			"6": "6",
+			"7": "7",
+			"8": "8",
+			"9": "9",
+			"10": "10",
+			"default": ""
+		},
+		"persistent-workspaces": {
+			"*": [1, 2, 3, 4]
+		},
+		"all-outputs": true
+	},
+
+	"group/media": {
+		"orientation": "horizontal",
+		"modules": [
+			"custom/media-animation",
+			"custom/media-now-playing",
+			"custom/media-time"
+		]
+	},
+
+	"custom/media-now-playing": {
+		"exec": "~/.config/waybar/custom_modules/media/media-now-playing.sh",
+		"escape": true,
+		"tooltip": false
+	},
+
+	"custom/media-animation": {
+		"exec": "~/.config/waybar/custom_modules/media/media-animation.sh",
+		"tooltip": false
+	},
+
+	"custom/media-time": {
+		"exec": "~/.config/waybar/custom_modules/media/media-time.sh",
+		"escape": true,
+		"tooltip": false,
+		"interval": 1
+	},
+
+	"tray": {
+		"spacing": 5
+	},
+
+	"clock": {
+		"format": " {:%A, %d, %H:%M}",
+		"tooltip-format": "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>"
+	},
+
+	"pulseaudio": {
+		"format": "  {volume}%",
+		"format-muted": "  {volume}%",
+		"on-click": "pavucontrol",
+		"on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+	},
+
+	"disk": {
+		"format": " DISK {percentage_used}%",
+		"tooltip-format": "Disk: {used:0.1f}GB / {total:0.1f}GB",
+		"interval": 2,
+		"on-click": "dolphin"
+	},
+
+	"cpu": {
+		"format": "{icon} CPU {usage}%",
+		"format-icons": ["󰍛"],
+		"tooltip": true,
+		"interval": 2,
+		"on-click": "kitty btop"
+	},
+
+	"memory": {
+		"format": "  RAM {percentage}%",
+		"tooltip-format": "RAM: {used:0.1f}GB / {total:0.1f}GB",
+		"interval": 2,
+		"on-click": "kitty btop"
+	},
+
+	"network": {
+		"format": " ",
+		"format-ethernet": " ",
+		"format-disconnected": "󱚼 ",
+		"tooltip-format": "{ifname} via {gwaddr}",
+		"tooltip-format-ethernet": "{ifname} ",
+		"tooltip-format-disconnected": "󰈂",
+		"max-length": 50
+	}
+}
+

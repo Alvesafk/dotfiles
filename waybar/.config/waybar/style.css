@@ -1,0 +1,103 @@
+* {
+	font-family: 'JetBrainsMono Nerd Font';
+	font-size: 14px;
+	min-height: 0;
+}
+
+window#waybar {
+	background-color: rgba(20, 20, 20, 0.8);
+	padding-bottom: 2px;
+}
+
+#workspaces button {
+	transition: ease-in 0.2s;
+	border-radius: 0;
+	padding: 5px 7px;
+	color: #fbf1c7;
+}
+
+#workspaces button.active {
+	color: #458588;
+	font-weight: bold;
+}
+
+#workspaces button.urgent {
+	color: #d65d0e;
+	font-weight: bold;
+}
+
+#media {
+	color: #d3869b;
+}
+
+#custom-media-animation {
+	color: #d3869b;
+	font-size: 13px;
+	margin-right: 10px;
+}
+
+#custom-media-now-playing {
+	color: #d3869b;
+	margin-right: 10px;
+}
+
+#custom-media-time {
+	color: #b16286;
+	font-size: 11px;
+}
+
+#pulseaudio {
+	color: #ff665f;
+	transition: ease-in 0.2s;
+	font-weight: bold;
+	margin: 0 2px 0 8px;
+}
+
+#pulseaudio:hover {
+	color: #bf261f;
+}
+
+#disk {
+	color: #458588;
+	transition: ease-in 0.2s;
+	font-weight: bold;
+	margin: 0 2px 0 8px;
+}
+
+#disk:hover {
+	color: #155558;
+}
+
+#cpu {
+	color: #689d6a;
+	transition: ease-in 0.2s;
+	font-weight: bold;
+	margin: 0 2px 0 8px;
+}
+
+#cpu:hover {
+	color: #286d2a;
+}
+
+#memory {
+	color: #fe8019;
+	transition: ease-in 0.2s;
+	font-weight: bold;
+	margin: 0 2px 0 8px;
+}
+
+#memory:hover {
+	color: #be5003;
+}
+
+#clock {
+	font-weight: bold;
+	color: #fbf1c7;
+	margin: 0 2px 0 2px;
+}
+
+#network {
+	font-weight: bold;
+	color: #fbf1c7;
+	margin: 0 10px 0 2px;
+}
