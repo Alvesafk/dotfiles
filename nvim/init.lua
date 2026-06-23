@@ -55,6 +55,21 @@ vim.o.mouse = "a"
 vim.o.modifiable = true
 vim.o.encoding = "UTF-8"
 
+vim.o.laststatus = 3
+vim.o.ruler = false
+vim.o.ttyfast = true
+vim.o.smoothscroll = true
+vim.o.title = true
+vim.o.numberwidth = 4
+vim.o.foldmethod = "expr"
+vim.o.foldlevel = 99
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+
+vim.o.conceallevel = 2
+vim.o.concealcursor = "nc"
+
+vim.o.splitkeep = 'screen'
+
 -- colorscheme that nvim initiates with
 local initColorScheme = "gruvbox"
 
@@ -87,14 +102,13 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-lualine/lualine.nvim" },
 	{ src = "https://github.com/akinsho/toggleterm.nvim" },
 	{ src = "https://github.com/brianhuster/live-preview.nvim" },
-	{ src = "https://github.com/nvim-mini/mini.tabline" },
 	{ src = "https://github.com/sphamba/smear-cursor.nvim" },
 	{ src = "https://github.com/f-person/git-blame.nvim" },
-	--{ src = "https://github.com/wakatime/vim-wakatime" },
 	{ src = "https://github.com/rachartier/tiny-inline-diagnostic.nvim" },
 	{ src = "https://github.com/goolord/alpha-nvim" },
 	{ src = "https://github.com/folke/noice.nvim" },
 	{ src = "https://github.com/rcarriga/nvim-notify" },
+	{ src = "https://github.com/romgrk/barbar.nvim" },
 })
 
 -- requiring you love
@@ -200,8 +214,6 @@ require('colorizer').setup({
 })
 require("koda").setup()
 
-require("mini.tabline").setup()
-
 require("smear_cursor").setup({
 	cursor_color = "#ffffff",
 
@@ -215,6 +227,12 @@ require("smear_cursor").setup({
 	stiffness = 0.9,
 	trailing_sitffness = 0.4,
 	damping = 0.99,
+})
+
+require("barbar").setup({
+	animation = true,
+	tabpages = true,
+	focus_on_close = 'left',
 })
 
 local alpha = require("alpha")
@@ -357,6 +375,24 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	command = [[%s/\s\*$//e]],
 })
 
+-- Autocmd to change relative number to false when in insert mode, and
+-- to true when out of insert mode.
+vim.api.nvim_create_augroup("InsertRelativeNumber", { clear = true })
+
+vim.api.nvim_create_autocmd("InsertEnter", {
+	group = "InsertRelativeNumber",
+	callback = function()
+		vim.o.relativenumber = false
+	end,
+})
+
+vim.api.nvim_create_autocmd("InsertLeave", {
+	group = "InsertRelativeNumber",
+	callback = function()
+		vim.o.relativenumber = true
+	end,
+})
+
 vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
 
 -- lsp enableingi
@@ -379,6 +415,7 @@ local builtin = require('telescope.builtin')
 map('n', '<leader>o', ':source<CR>')
 map('n', '<leader>w', ':write<CR>')
 map('n', '<leader>q', ':exit<CR>')
+map('n', '<leader>r', ':restart<CR>')
 map('n', '<leader>tm', ':ToggleTerm direction=float name=@io<CR>')
 map('n', '<leader>no', ':noh<CR>')
 
