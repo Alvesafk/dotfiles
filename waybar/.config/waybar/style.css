@@ -46,6 +46,10 @@ window#waybar {
 	font-size: 11px;
 }
 
+#tray {
+	margin-right: 4px;
+}
+
 #pulseaudio {
 	color: #ff665f;
 	transition: ease-in 0.2s;
