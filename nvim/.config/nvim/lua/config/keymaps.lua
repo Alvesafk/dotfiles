@@ -28,7 +28,7 @@ map({ "n", "v", "x" }, "<leader>d", '"+d')
 map("n", "<leader>lf", vim.lsp.buf.format)
 map("n", "<leader>ca", vim.lsp.buf.code_action)
 
-map("n", "<leader>cc", function ()
+map("n", "<leader>tc", function ()
 	local cc = "90"
 	if vim.o.colorcolumn ~= "0" then
 		cc = "0"
