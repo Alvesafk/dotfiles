@@ -5,8 +5,14 @@
 }
 
 window#waybar {
-	background-color: rgba(20, 20, 20, 0.8);
+	background-color: rgba(20, 20, 20, 0.85);
 	padding-bottom: 2px;
+	border-bottom: 1px solid rgba(251, 241, 199, 0.13);
+}
+
+#custom-sep {
+	color: rgba(80, 80, 80, 0.9);
+	margin: 0 2px;
 }
 
 #workspaces button {
@@ -17,16 +23,23 @@ window#waybar {
 }
 
 #workspaces button.active {
-	color: #458588;
+	background-color: #458588;
 	font-weight: bold;
 }
 
 #workspaces button.urgent {
-	color: #d65d0e;
+	background-color: #d65d0e;
+	font-weight: bold;
+}
+
+#custom-weather {
+	margin: 0 10px;
+	color: #fabd2f;
 	font-weight: bold;
 }
 
 #media {
+	margin-left: 4px;
 	color: #d3869b;
 }
 
@@ -54,7 +67,7 @@ window#waybar {
 	color: #ff665f;
 	transition: ease-in 0.2s;
 	font-weight: bold;
-	margin: 0 2px 0 8px;
+	margin: 0 2px;
 }
 
 #pulseaudio:hover {
@@ -65,7 +78,7 @@ window#waybar {
 	color: #458588;
 	transition: ease-in 0.2s;
 	font-weight: bold;
-	margin: 0 2px 0 8px;
+	margin: 0 2px;
 }
 
 #disk:hover {
@@ -76,7 +89,7 @@ window#waybar {
 	color: #689d6a;
 	transition: ease-in 0.2s;
 	font-weight: bold;
-	margin: 0 2px 0 8px;
+	margin: 0 2px;
 }
 
 #cpu:hover {
@@ -87,7 +100,7 @@ window#waybar {
 	color: #fe8019;
 	transition: ease-in 0.2s;
 	font-weight: bold;
-	margin: 0 2px 0 8px;
+	margin: 0 2px;
 }
 
 #memory:hover {
@@ -97,7 +110,7 @@ window#waybar {
 #clock {
 	font-weight: bold;
 	color: #fbf1c7;
-	margin: 0 2px 0 2px;
+	margin: 0 2px;
 }
 
 #network {

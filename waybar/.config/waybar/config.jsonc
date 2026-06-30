@@ -4,8 +4,14 @@
 	"height": 30,
 	"spacing": 4,
 
-	"modules-left": ["hyprland/workspaces", "group/media"],
-	"modules-right": ["tray", "pulseaudio", "disk", "cpu", "memory", "clock", "network"],
+	"modules-left": ["hyprland/workspaces", "custom/sep", "custom/weather", "custom/sep", "group/media"],
+	"modules-right": ["tray", "custom/sep", "pulseaudio", "custom/sep", "disk", "custom/sep","cpu", "custom/sep", "memory", "custom/sep" ,"clock", "network"],
+
+	"custom/sep": {
+	"format": "|",
+	"interval": "once",
+	"tooltip": false
+},
 
 	"hyprland/workspaces": {
 		"format": "{icon}",
@@ -26,6 +32,12 @@
 			"*": [1, 2, 3, 4]
 		},
 		"all-outputs": true
+	},
+
+	"custom/weather": {
+		"exec": "curl -s 'wttr.in/Araruama?format=%C+%t'",
+		"interval": 120,
+		"format": " {}"
 	},
 
 	"group/media": {
@@ -65,17 +77,18 @@
 	},
 
 	"pulseaudio": {
-		"format": "  {volume}%",
-		"format-muted": "  {volume}%",
+		"format": "  VOL {volume}%",
+		"format-muted": "  VOL {volume}%",
 		"on-click": "pavucontrol",
 		"on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 	},
 
 	"disk": {
 		"format": " DISK {percentage_used}%",
+		"tooltip": true,
 		"tooltip-format": "Disk: {used:0.1f}GB / {total:0.1f}GB",
 		"interval": 2,
-		"on-click": "dolphin"
+		"on-click": "nemo"
 	},
 
 	"cpu": {

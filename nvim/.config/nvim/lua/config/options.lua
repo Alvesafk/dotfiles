@@ -25,8 +25,8 @@ vim.o.pumblend = 10
 vim.o.winblend = 0
 
 -- Conceal Markdown tags
-vim.o.conceallevel = 2
-vim.o.concealcursor = "nc"
+vim.o.conceallevel = 0
+vim.o.concealcursor = ""
 
 vim.o.synmaxcol = 300
 vim.o.backup = false
