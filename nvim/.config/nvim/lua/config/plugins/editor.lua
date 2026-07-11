@@ -51,7 +51,5 @@ require("tiny-inline-diagnostic").setup({
 require("nvim-treesitter").setup()
 require("toggleterm").setup()
 
-require("gitblame").setup({
-	enabled = true,
-	message_template = "  <author> :: <date>",
-})
+require("neogit").setup()
+require("gitsigns").setup()

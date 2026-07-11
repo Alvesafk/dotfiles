@@ -34,6 +34,8 @@ local ignored_langs = {
 	["TelescopePrompt"] = true,
 	["TelescopeResults"] = true,
 	["javascriptreact"] = true,
+	["NeogitStatus"] = true,
+	["NeogitPopup"] = true,
 }
 
 -- Auto install parser from TreeSitter based on the file that has been opened

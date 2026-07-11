@@ -24,7 +24,7 @@ function M.coloring(data)
 	M.transparent = true
 
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+	-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
 -- This function is for toggling the transparency of the background.
@@ -33,7 +33,7 @@ function M.toggle_transparency()
 		M.saved_hl = vim.api.nvim_get_hl(0, { name = "Normal", link = false })
 		local without_bg = vim.tbl_extend("force", M.saved_hl, { bg = "none" })
 		vim.api.nvim_set_hl(0, "Normal", without_bg)
-		vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+		-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 		M.transparent = true
 	else
 		if M.saved_hl then
@@ -45,6 +45,7 @@ end
 
 -- Creates the Coloring user command.
 vim.api.nvim_create_user_command("Coloring", M.coloring, { nargs = "?", complete = "color" })
+vim.api.nvim_create_user_command("ToggleTransparency", M.toggle_transparency, {})
 
 -- Calls Coloring on init.
 M.coloring()

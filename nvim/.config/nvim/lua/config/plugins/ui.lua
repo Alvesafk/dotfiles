@@ -48,3 +48,5 @@ require("colorizer").setup({
 
 require("ibl").setup()
 require("koda").setup()
+require("evergarden").setup()
+require("rose-pine").setup()

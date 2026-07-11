@@ -41,8 +41,11 @@ map("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
 map("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
 map("n", "<leader>e", ":Neotree float<CR>")
 map("n", "<leader>ti", ":IBLToggle<CR>")
-map("n", "<leader>gb", ":GitBlameToggle<CR>")
 map("n", "<leader>tm", ":ToggleTerm direction=float name=@io<CR>")
+
+-- Git stuff
+map("n", "<leader>gg", ":Neogit<CR>")
+map("n", "G", ":Gitsigns blame_line<CR>")
 
 -- Own functions based keymaps.
 map("n", "<leader>tt", ":Coloring<CR>")

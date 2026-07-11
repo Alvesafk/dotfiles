@@ -16,7 +16,7 @@ export TERM=xterm-256color
 export GPG_TTY=$(tty)
 
 # path with cargo and go bins
-export PATH="$HOME/.cargo/bin:$PATH:/usr/local/go/bin:$GOPATH/bin"
+export PATH="$HOME/.cargo/bin:$PATH:/usr/local/go/bin:$GOPATH/bin:/$HOME/.config/emacs/bin"
 
 if command -v bat >/dev/null 2>&1; then
 	export MANPAGER="bat -l man -p"
