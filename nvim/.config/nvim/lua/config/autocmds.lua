@@ -19,7 +19,7 @@ autocmd("FileType", {
 	end,
 })
 
--- Igonred langs is used on a autocmd that makes TreeSitter auto install parsers for files
+-- Ignored langs is used on a autocmd that makes TreeSitter auto install parsers for files
 -- that aren't installed yet, this serves to ignore files or buffers that don't have parsers.
 local ignored_langs = {
 	["neo-tree"] = true,
@@ -36,6 +36,8 @@ local ignored_langs = {
 	["javascriptreact"] = true,
 	["NeogitStatus"] = true,
 	["NeogitPopup"] = true,
+	["NeogitConsole"] = true,
+	["NeogitDiffView"] = true,
 }
 
 -- Auto install parser from TreeSitter based on the file that has been opened

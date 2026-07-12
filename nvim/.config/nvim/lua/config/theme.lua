@@ -1,7 +1,7 @@
 local M = {}
 
 -- Initial state of the theme.
-M.init_colorscheme = "gruvbox"
+M.init_colorscheme = "koda-dark"
 M.saved_hl = nil
 M.transparent = false
 

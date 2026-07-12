@@ -4,28 +4,29 @@
 	"height": 30,
 	"spacing": 4,
 
-	"modules-left": ["hyprland/workspaces", "custom/sep", "custom/weather", "custom/sep", "group/media"],
-	"modules-right": ["tray", "custom/sep", "pulseaudio", "custom/sep", "disk", "custom/sep","cpu", "custom/sep", "memory", "custom/sep" ,"clock", "network"],
+	"modules-left": ["hyprland/workspaces", "custom/sep", "clock", "custom/sep", "custom/weather"],
+	"modules-center": ["group/media"],
+	"modules-right": ["tray", "custom/sep", "pulseaudio", "custom/sep", "disk", "custom/sep","cpu", "custom/sep", "memory"],
 
 	"custom/sep": {
 	"format": "|",
 	"interval": "once",
 	"tooltip": false
-},
+	},
 
 	"hyprland/workspaces": {
 		"format": "{icon}",
 		"format-icons": {
-			"1": "1",
-			"2": "2",
-			"3": "3",
-			"4": "4",
-			"5": "5",
-			"6": "6",
-			"7": "7",
-			"8": "8",
-			"9": "9",
-			"10": "10",
+			"1": "",
+			"2": "󰈹",
+			"3": "󰸳",
+			"4": "󱩡",
+			"5": "",
+			"6": "󰣇",
+			"7": "",
+			"8": "",
+			"9": "",
+			"10": "",
 			"default": ""
 		},
 		"persistent-workspaces": {
@@ -37,7 +38,7 @@
 	"custom/weather": {
 		"exec": "curl -s 'wttr.in/Araruama?format=%C+%t'",
 		"interval": 120,
-		"format": " {}"
+		"format": "{}"
 	},
 
 	"group/media": {
@@ -77,14 +78,14 @@
 	},
 
 	"pulseaudio": {
-		"format": "  VOL {volume}%",
-		"format-muted": "  VOL {volume}%",
+		"format": "VOL :: {volume}%",
+		"format-muted": "VOL !: {volume}%",
 		"on-click": "pavucontrol",
 		"on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 	},
 
 	"disk": {
-		"format": " DISK {percentage_used}%",
+		"format": "DISK :: {percentage_used}%",
 		"tooltip": true,
 		"tooltip-format": "Disk: {used:0.1f}GB / {total:0.1f}GB",
 		"interval": 2,
@@ -92,28 +93,17 @@
 	},
 
 	"cpu": {
-		"format": "{icon} CPU {usage}%",
-		"format-icons": ["󰍛"],
+		"format": "CPU :: {usage}%",
 		"tooltip": true,
 		"interval": 2,
 		"on-click": "kitty btop"
 	},
 
 	"memory": {
-		"format": "  RAM {percentage}%",
+		"format": "RAM :: {percentage}%",
 		"tooltip-format": "RAM: {used:0.1f}GB / {total:0.1f}GB",
 		"interval": 2,
 		"on-click": "kitty btop"
 	},
-
-	"network": {
-		"format": " ",
-		"format-ethernet": " ",
-		"format-disconnected": "󱚼 ",
-		"tooltip-format": "{ifname} via {gwaddr}",
-		"tooltip-format-ethernet": "{ifname} ",
-		"tooltip-format-disconnected": "󰈂",
-		"max-length": 50
-	}
 }
 
