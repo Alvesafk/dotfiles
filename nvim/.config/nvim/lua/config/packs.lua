@@ -39,6 +39,7 @@ vim.pack.add({
 	{ src = "https://github.com/m00qek/baleia.nvim" },
 	{ src = "https://github.com/NeogitOrg/neogit" },
 	{ src = "https://github.com/lewis6991/gitsigns.nvim"},
+	{ src = "https://github.com/vieitesss/command.nvim"},
 
 	{ src = "https://codeberg.org/evergarden/nvim.git", name = "evergarden" },
 })

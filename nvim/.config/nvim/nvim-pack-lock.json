@@ -24,6 +24,10 @@
       "rev": "b127d48bf8e9ac9cf41f6e0fbead317503f76558",
       "src": "https://github.com/Saghen/blink.lib"
     },
+    "command.nvim": {
+      "rev": "6eb90dd328d402ae8847635d0d6be0934bf65668",
+      "src": "https://github.com/vieitesss/command.nvim"
+    },
     "diffview.nvim": {
       "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
       "src": "https://github.com/sindrets/diffview.nvim"
