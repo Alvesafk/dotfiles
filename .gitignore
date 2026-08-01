@@ -2,3 +2,4 @@ vim/plugged/
 vim/autoload/
 tmux/.config/tmux/plugins/
 zsh/.config/zsh/plugins/
+hypr/.config/hypr/hl.meta.lua
