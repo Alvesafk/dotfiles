@@ -31,7 +31,30 @@ cmp.setup({
 		["<C-j>"] = { "select_next", "fallback" },
 	},
 	appearance = { nerd_font_variant = "mono" },
-	completion = { documentation = { auto_show = false } },
+	completion = {
+		menu = {
+			draw = {
+				columns = {
+					{ "kind_icon" },
+					{ "label",    "label_description", gap = 1 },
+					{ "kind" }
+				}
+			}
+		},
+
+		documentation = {
+			auto_show = false,
+		},
+
+	},
+
+	signature = {
+		enabled = true,
+		window = {
+			show_documentation = false,
+			border = "single"
+		},
+	},
 	sources = { default = { "lsp", "path", "snippets", "buffer" } },
 	fuzzy = { implementation = "rust" },
 })

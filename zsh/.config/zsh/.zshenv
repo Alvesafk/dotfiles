@@ -11,12 +11,15 @@ export VISUAL="nvim"
 # go
 export GOPATH=$HOME/first-party/go
 
+# odin
+export ODIN_ROOT=$HOME/third-party/Odin/
+
 # random stuff
 export TERM=xterm-256color
 export GPG_TTY=$(tty)
 
 # path with cargo and go bins
-export PATH="$HOME/.cargo/bin:$PATH:/usr/local/go/bin:$GOPATH/bin:/$HOME/.config/emacs/bin"
+export PATH="$HOME/.cargo/bin:$PATH:/usr/local/go/bin:$GOPATH/bin:$ODIN_ROOT"
 
 if command -v bat >/dev/null 2>&1; then
 	export MANPAGER="bat -l man -p"

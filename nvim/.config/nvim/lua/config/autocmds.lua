@@ -28,6 +28,7 @@ local ignored_langs = {
 	["sh"] = true,
 	["alpha"] = true,
 	["blink-cmp-menu"] = true,
+	["blink-cmp-signature"] = true,
 	["notify"] = true,
 	["noice"] = true,
 	["checkhealth"] = true,

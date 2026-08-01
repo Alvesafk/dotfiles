@@ -11,6 +11,12 @@ require("noice").setup({
 		inc_renme = false,
 		lsp_doc_border = false,
 	},
+
+	lsp = {
+		signature = {
+			enabled = false,
+		}
+	}
 })
 
 require("lualine").setup({})

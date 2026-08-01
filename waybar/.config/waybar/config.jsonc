@@ -3,8 +3,11 @@
 	"position": "top",
 	"height": 30,
 	"spacing": 4,
+	"exclusive": true,
+	"passthrough": false,
+	"gtk-layer-shell": true,
 
-	"modules-left": ["hyprland/workspaces", "custom/sep", "clock", "custom/sep", "custom/weather"],
+	"modules-left": ["hyprland/workspaces", "custom/sep", "hyprland/window", "custom/sep", "clock", "custom/sep", "custom/weather"],
 	"modules-center": ["group/media"],
 	"modules-right": ["tray", "custom/sep", "pulseaudio", "custom/sep", "disk", "custom/sep","cpu", "custom/sep", "memory"],
 
@@ -35,6 +38,21 @@
 		"all-outputs": true
 	},
 
+	"hyprland/window": {
+	"format": "{}",
+	"max-length": 15,
+	"separate-outputs": true,
+	"offscreen-css": true,
+	"offscreen-css-text": "(inactive)",
+	"rewrite": {
+		"(.*) — Mozilla Firefox": " $1",
+		"(.*) - fish": "> [$1]",
+		"(.*) - zsh": "> [$1]",
+		"(.*) - $term": "> [$1]",
+		"(.*) - nvim": "nvim",
+		"(.*) - discord": "Discord",
+	},
+},
 	"custom/weather": {
 		"exec": "curl -s 'wttr.in/Araruama?format=%C+%t'",
 		"interval": 120,
