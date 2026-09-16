@@ -48,6 +48,6 @@ vim.api.nvim_create_user_command("Coloring", M.coloring, { nargs = "?", complete
 vim.api.nvim_create_user_command("ToggleTransparency", M.toggle_transparency, {})
 
 -- Calls Coloring on init.
-M.coloring()
+-- M.coloring()
 
 return M

@@ -39,6 +39,7 @@ local ignored_langs = {
 	["NeogitPopup"] = true,
 	["NeogitConsole"] = true,
 	["NeogitDiffView"] = true,
+	["themery"] = true,
 }
 
 -- Auto install parser from TreeSitter based on the file that has been opened
@@ -69,7 +70,7 @@ autocmd("LspAttach", {
 -- Regex to delete Useless trailing whitespace when saving a file.
 autocmd("BufWritePre", {
 	pattern = "*",
-	command = [[%s/\s\*$//e]],
+	command = [[%s/\s$//e]],
 })
 
 -- Augroup of the next two autocmds.

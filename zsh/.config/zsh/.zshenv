@@ -9,7 +9,7 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 
 # go
-export GOPATH=$HOME/first-party/go
+export GOPATH=$HOME/go
 
 # odin
 export ODIN_ROOT=$HOME/third-party/Odin/
@@ -19,7 +19,7 @@ export TERM=xterm-256color
 export GPG_TTY=$(tty)
 
 # path with cargo and go bins
-export PATH="$HOME/.cargo/bin:$PATH:/usr/local/go/bin:$GOPATH/bin:$ODIN_ROOT"
+export PATH="$HOME/.cargo/bin:$PATH:/usr/local/go/bin:$GOPATH/bin:$ODIN_ROOT:$HOME/.local/bin"
 
 if command -v bat >/dev/null 2>&1; then
 	export MANPAGER="bat -l man -p"

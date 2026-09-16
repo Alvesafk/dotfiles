@@ -38,8 +38,12 @@ vim.pack.add({
 	{ src = "https://github.com/sindrets/diffview.nvim" },
 	{ src = "https://github.com/m00qek/baleia.nvim" },
 	{ src = "https://github.com/NeogitOrg/neogit" },
-	{ src = "https://github.com/lewis6991/gitsigns.nvim"},
-	{ src = "https://github.com/vieitesss/command.nvim"},
+	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+	{ src = "https://github.com/vieitesss/command.nvim" },
+	{ src = "https://github.com/mason-org/mason.nvim" },
+	{ src = "https://github.com/wakatime/vim-wakatime" },
+	{ src = "https://github.com/folke/todo-comments.nvim" },
+	{ src = "https://github.com/zaldih/themery.nvim" },
 
 	{ src = "https://codeberg.org/evergarden/nvim.git", name = "evergarden" },
 })

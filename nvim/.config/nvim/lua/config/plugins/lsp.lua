@@ -1,4 +1,6 @@
 -- lsp.lua is the lsp configuration and enable file.
+require("mason").setup()
+
 vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
@@ -20,5 +22,11 @@ vim.lsp.config('ols', {
 	capabilities = require("blink.cmp").get_lsp_capabilities(),
 })
 
+vim.lsp.config("sqls", {
+	cmd = { "sqls" },
+	filetypes = { "sql", "mysql" },
+	root_markers = { ".sqls", ".git" }
+})
+
 vim.lsp.enable({ "lua_ls", "clangd", "rust_analyzer", "pyright", "bashls", "html", "cssls", "ts_ls", "gopls",
-	"tailwindcss", "ols" })
+	"tailwindcss", "ols", "sqls" })

@@ -56,3 +56,45 @@ require("ibl").setup()
 require("koda").setup()
 require("evergarden").setup()
 require("rose-pine").setup()
+
+require("themery").setup({
+	themes = {
+		"monoglow",
+		"monoglow-lack",
+		"monoglow-light",
+		"monoglow-void",
+		"monoglow-z",
+		"koda",
+		"koda-dark",
+		"koda-glade",
+		"koda-light",
+		"koda-moss",
+		"tokyonight",
+		"tokyonight-day",
+		"tokyonight-moon",
+		"tokyonight-night",
+		"tokyonight-storm",
+		"material",
+		"material-darker",
+		"material-deep-ocean",
+		"material-lighter",
+		"material-oceanic",
+		"material-palenight",
+		"lackluster",
+		"lackluster-dark",
+		"lackluster-hack",
+		"lackluster-mint",
+		"lackluster-night",
+		"miasma",
+		"rose-pine",
+		"rose-pine-dawn",
+		"rose-pine-main",
+		"rose-pine-moon",
+		"kanagawa",
+		"kanagawa-dragon",
+		"kanagawa-lotus",
+		"kanagawa-wave",
+	},
+
+	LivePreview = true,
+})

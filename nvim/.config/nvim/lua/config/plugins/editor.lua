@@ -75,5 +75,7 @@ require("nvim-treesitter").setup()
 require("toggleterm").setup()
 require("command").setup()
 
+require("todo-comments").setup()
+
 require("neogit").setup()
 require("gitsigns").setup()
