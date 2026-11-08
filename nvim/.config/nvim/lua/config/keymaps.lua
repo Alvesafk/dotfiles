@@ -6,58 +6,54 @@ local theme = require("config.theme")
 -- Nvim based keymaps.
 map("n", "j", function()
 	return vim.v.count == 0 and "gj" or "j"
-end, { expr = true, silent = true })
+end, { expr = true, silent = true, desc = "Down (display line)" })
 
 map("n", "k", function()
 	return vim.v.count == 0 and "gk" or "k"
-end, { expr = true, silent = true })
+end, { expr = true, silent = true, desc = "Up (display line)" })
 
-map("n", "<C-h>", "<C-w>h")
-map("n", "<C-j>", "<C-w>j")
-map("n", "<C-k>", "<C-w>k")
-map("n", "<C-l>", "<C-w>l")
+map("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
+map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
+map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
+map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
-map("n", "<leader>o", ":source<CR>")
-map("n", "<leader>w", ":write<CR>")
-map("n", "<leader>q", ":exit<CR>")
-map("n", "<leader>r", ":restart<CR>")
-map("n", "<leader>no", ":noh<CR>")
+map("n", "<leader>o", "<cmd>source<CR>", { desc = "Source current file" })
+map("n", "<leader>w", "<cmd>write<CR>", { desc = "Write file" })
+map("n", "<leader>q", "<cmd>exit<CR>", { desc = "Write (if changed) and close window" })
+map("n", "<leader>r", "<cmd>restart<CR>", { desc = "Restart Neovim" })
+map("n", "<leader>no", "<cmd>noh<CR>", { desc = "Clear search highlight" })
 
 map("n", "<leader>tw", function()
 	vim.wo.wrap = not vim.wo.wrap
 end, { desc = "Toggle wrap" })
 
-map({ "n", "v", "x" }, "<leader>y", '"+y')
-map({ "n", "v", "x" }, "<leader>d", '"+d')
+map({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
+map({ "n", "v" }, "<leader>d", '"+d', { desc = "Delete to system clipboard" })
 
-map("n", "<leader>lf", vim.lsp.buf.format)
-map("n", "<leader>ca", vim.lsp.buf.code_action)
+map("n", "<leader>lf", vim.lsp.buf.format, { desc = "LSP format" })
+map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
 
 map("n", "<leader>tc", function()
-	local cc = "0"
-	if vim.o.colorcolumn ~= "90" then
-		cc = "90"
-	end
-	vim.o.colorcolumn = cc
-end)
+	vim.o.colorcolumn = vim.o.colorcolumn == "90" and "" or "90"
+end, { desc = "Toggle color column" })
 
 -- Plugin based keymaps.
 map("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
 map("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
-map("n", "<leader>e", ":Neotree float<CR>")
-map("n", "<leader>ti", ":IBLToggle<CR>")
-map("n", "<leader>tm", ":ToggleTerm direction=float name=@io<CR>")
-map("n", "<leader>te", ":CommandExecute<CR>")
-map("n", "<leader>tl", ":CommandExecuteLast<CR>")
+map("n", "<leader>e", "<cmd>Neotree float<CR>", { desc = "File explorer" })
+map("n", "<leader>ti", "<cmd>IBLToggle<CR>", { desc = "Toggle indent lines" })
+map("n", "<leader>tm", "<cmd>ToggleTerm direction=float name=@io<CR>", { desc = "Toggle floating terminal" })
+map("n", "<leader>te", "<cmd>CommandExecute<CR>", { desc = "Execute command" })
+map("n", "<leader>tl", "<cmd>CommandExecuteLast<CR>", { desc = "Execute last command" })
 
-map("n", "<leader>tt", ":Themery<CR>")
+map("n", "<leader>tt", "<cmd>Themery<CR>", { desc = "Theme picker" })
 
-map("n", "<leader>ft", ":TodoTelescope<CR>")
-map("n", "<leader>fl", ":TodoLocList<CR>")
+map("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "Find TODOs" })
+map("n", "<leader>fl", "<cmd>TodoLocList<CR>", { desc = "TODOs in location list" })
 
 -- Git stuff
-map("n", "<leader>gg", ":Neogit<CR>")
-map("n", "G", ":Gitsigns blame_line<CR>")
+map("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Neogit" })
+map("n", "<leader>gb", "<cmd>Gitsigns blame_line<CR>", { desc = "Git blame line" })
 
 -- Own functions based keymaps.
-map("n", "<leader>tp", theme.toggle_transparency)
+map("n", "<leader>tp", theme.toggle_transparency, { desc = "Toggle transparency" })

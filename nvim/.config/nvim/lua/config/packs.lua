@@ -1,3 +1,20 @@
+-- Build hooks, they must be created before vim.pack.add to also run on the first install.
+vim.api.nvim_create_autocmd("PackChanged", {
+	group = vim.api.nvim_create_augroup("config.pack_build", { clear = true }),
+	callback = function(ev)
+		local data = ev.data
+		if data.spec.name == "telescope-fzf-native.nvim" and data.kind ~= "delete" then
+			vim.system({ "make" }, { cwd = data.path }, function(res)
+				if res.code ~= 0 then
+					vim.schedule(function()
+						vim.notify("telescope-fzf-native: make failed\n" .. res.stderr, vim.log.levels.ERROR)
+					end)
+				end
+			end)
+		end
+	end,
+})
+
 -- Add for all the plugins that are been used.
 vim.pack.add({
 	{ src = "https://github.com/wnkz/monoglow.nvim" },

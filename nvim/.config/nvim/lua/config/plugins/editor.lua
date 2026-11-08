@@ -1,6 +1,7 @@
 -- editor.lua has the configuration of all the plugins that add or modify something on the
 -- editor, in the sense of improving the writing experience.
 require("telescope").setup()
+pcall(require("telescope").load_extension, "fzf")
 
 require("neo-tree").setup({
 	close_if_last_window = false,
@@ -14,6 +15,9 @@ require("neo-tree").setup({
 		},
 	},
 })
+
+-- Makes LSP aware of files renamed/moved from neo-tree (updates imports).
+require("lsp-file-operations").setup()
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
@@ -61,7 +65,7 @@ cmp.setup({
 
 require("tiny-inline-diagnostic").setup({
 	preset = "ghost",
-	transpare_bg = true,
+	transparent_bg = true,
 	options = {
 		multilines = {
 			enabled = true,

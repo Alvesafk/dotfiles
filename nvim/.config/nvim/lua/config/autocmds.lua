@@ -4,6 +4,7 @@ local augroup = vim.api.nvim_create_augroup
 
 -- Calls theme.lua and sets the saved_hl to nil and transparent background to false.
 autocmd("ColorScheme", {
+	group = augroup("config.theme", { clear = true }),
 	callback = function()
 		local theme = require("config.theme")
 		theme.saved_hl = nil
@@ -11,21 +12,12 @@ autocmd("ColorScheme", {
 	end,
 })
 
--- Starts treesitter based on the file type.
-autocmd("FileType", {
-	callback = function()
-		pcall(vim.treesitter.start)
-		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-	end,
-})
-
--- Ignored langs is used on a autocmd that makes TreeSitter auto install parsers for files
--- that aren't installed yet, this serves to ignore files or buffers that don't have parsers.
+-- Ignored filetypes are skipped by the TreeSitter autocmd below, this serves to ignore
+-- plugin buffers or windows that don't have parsers.
 local ignored_langs = {
 	["neo-tree"] = true,
 	["neo-tree-popup"] = true,
 	["toggleterm"] = true,
-	["sh"] = true,
 	["alpha"] = true,
 	["blink-cmp-menu"] = true,
 	["blink-cmp-signature"] = true,
@@ -34,7 +26,6 @@ local ignored_langs = {
 	["checkhealth"] = true,
 	["TelescopePrompt"] = true,
 	["TelescopeResults"] = true,
-	["javascriptreact"] = true,
 	["NeogitStatus"] = true,
 	["NeogitPopup"] = true,
 	["NeogitConsole"] = true,
@@ -42,15 +33,47 @@ local ignored_langs = {
 	["themery"] = true,
 }
 
--- Auto install parser from TreeSitter based on the file that has been opened
+-- Starts TreeSitter (highlight + indent) for the buffer, returns false if there is no parser.
+local function ts_start(buf, lang)
+	if not pcall(vim.treesitter.start, buf, lang) then
+		return false
+	end
+	vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+	return true
+end
+
+-- Starts TreeSitter based on the file type, and auto installs the parser when it is missing.
+-- The filetype is mapped to the parser name (e.g. sh -> bash, javascriptreact -> tsx).
 autocmd("FileType", {
-	callback = function()
-		local lang = vim.bo.filetype
-		local installed = require("nvim-treesitter.config").get_installed()
-		if not vim.tbl_contains(installed, lang) and not ignored_langs[lang] then
-			require("nvim-treesitter").install({ lang })
+	group = augroup("config.treesitter", { clear = true }),
+	callback = function(args)
+		local ft = args.match
+		if ft == "" or ignored_langs[ft] then
+			return
 		end
-		pcall(vim.treesitter.start)
+		local lang = vim.treesitter.language.get_lang(ft) or ft
+
+		if ts_start(args.buf, lang) then
+			return
+		end
+
+		local ts_config = require("nvim-treesitter.config")
+		if vim.tbl_contains(ts_config.get_installed(), lang)
+			or not vim.tbl_contains(ts_config.get_available(), lang) then
+			return
+		end
+
+		-- install() is async, so start TreeSitter only after the parser has been installed.
+		require("nvim-treesitter").install({ lang }):await(function(err)
+			if err then
+				return
+			end
+			vim.schedule(function()
+				if vim.api.nvim_buf_is_valid(args.buf) then
+					ts_start(args.buf, lang)
+				end
+			end)
+		end)
 	end,
 })
 
@@ -67,26 +90,38 @@ autocmd("LspAttach", {
 	end,
 })
 
--- Regex to delete Useless trailing whitespace when saving a file.
+-- Deletes useless trailing whitespace when saving a file, keeping the cursor position.
 autocmd("BufWritePre", {
-	pattern = "*",
-	command = [[%s/\s$//e]],
+	group = augroup("config.trim_whitespace", { clear = true }),
+	callback = function()
+		local view = vim.fn.winsaveview()
+		vim.cmd([[keeppatterns silent! %s/\s\+$//e]])
+		vim.fn.winrestview(view)
+	end,
 })
 
 -- Augroup of the next two autocmds.
 local insert_rnu = augroup("InsertRelativeNumber", { clear = true })
 
--- When entering insert mode disable relative numbers.
+-- When entering insert mode disable relative numbers (only on normal buffers with numbers).
 autocmd("InsertEnter", {
 	group = insert_rnu,
-	callback = function() vim.o.relativenumber = false end,
+	callback = function()
+		if vim.bo.buftype == "" and vim.wo.number then vim.wo.relativenumber = false end
+	end,
 })
 
 -- When leaving insert mode enable relative numbers.
 autocmd("InsertLeave", {
 	group = insert_rnu,
-	callback = function() vim.o.relativenumber = true end,
+	callback = function()
+		if vim.bo.buftype == "" and vim.wo.number then vim.wo.relativenumber = true end
+	end,
 })
 
 -- Alpha plugins autocmd
-vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
+autocmd("FileType", {
+	group = augroup("config.alpha", { clear = true }),
+	pattern = "alpha",
+	callback = function() vim.wo.foldenable = false end,
+})

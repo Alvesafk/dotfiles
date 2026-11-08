@@ -8,7 +8,7 @@ require("noice").setup({
 		bottom_search = true,
 		command_palette = true,
 		long_message_to_split = true,
-		inc_renme = false,
+		inc_rename = false,
 		lsp_doc_border = false,
 	},
 
@@ -35,7 +35,7 @@ require("smear_cursor").setup({
 	min_horizontal_distance_smear = 2,
 	time_interval = 17,
 	stiffness = 0.9,
-	trailing_sitffness = 0.4,
+	trailing_stiffness = 0.4,
 	damping = 0.99,
 })
 
