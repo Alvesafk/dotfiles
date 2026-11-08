@@ -26,3 +26,6 @@ if command -v bat >/dev/null 2>&1; then
 fi
 
 export STARSHIP_CONFIG="$ZDOTDIR/starship.toml"
+
+# Vite+ bin (https://viteplus.dev)
+. "/home/afk/.config/vite-plus/env"

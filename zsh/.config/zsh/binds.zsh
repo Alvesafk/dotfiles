@@ -7,8 +7,10 @@ ZVM_VI_HIGHLIGHT_FOREGROUND=none
 ZVM_VI_HIGHLIGHT_EXTRASTYLE=none
 
 zvm_after_init() {
+	source <(fzf --zsh)
+
 	bindkey '^[[1;5C' forward-word
-	bindkey '^[[1;%D' backward-word
+	bindkey '^[[1;5D' backward-word
 
 	bindkey '^F' _fzf_file_no_hidden
 

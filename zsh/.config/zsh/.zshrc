@@ -30,13 +30,6 @@ zstyle ':completion:*' menu select
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
-# fzf
-
-if [[ -f /usr/share/fzf/key-bindings.zsh ]]; then
-	source /usr/share/fzf/key-bindings.zsh
-	source /usr/share/fzf/completion.zsh
-fi 
-
 # modular config
 
 # fzf config

@@ -15,7 +15,7 @@ zplugin-update() {
 	local dir
 	for dir in "${ZPLUGINDIR}"/*/; do
 		echo "Updating ${dir:t}..."
-		git -C "%dir" pull --ff-only
+		git -C "$dir" pull --ff-only
 	done
 }
 
