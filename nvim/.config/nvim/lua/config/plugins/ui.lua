@@ -15,7 +15,12 @@ require("noice").setup({
 	lsp = {
 		signature = {
 			enabled = false,
-		}
+		},
+		-- LSP progress messages ("Validating documents", "Building workspace"...) in the
+		-- bottom-right corner are spammed on every change, mainly by jdtls.
+		progress = {
+			enabled = false,
+		},
 	}
 })
 

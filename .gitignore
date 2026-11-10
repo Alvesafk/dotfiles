@@ -3,3 +3,5 @@ vim/autoload/
 tmux/.config/tmux/plugins/
 zsh/.config/zsh/plugins/
 hypr/.config/hypr/hl.meta.lua
+herdr/.config/herdr/*
+!herdr/.config/herdr/config.toml

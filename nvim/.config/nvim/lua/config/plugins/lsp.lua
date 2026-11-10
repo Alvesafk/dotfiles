@@ -66,4 +66,4 @@ vim.lsp.config("astro", {
 })
 
 vim.lsp.enable({ "lua_ls", "clangd", "rust_analyzer", "pyright", "bashls", "html", "cssls", "ts_ls", "gopls",
-	"tailwindcss", "ols", "sqls", "svelte", "astro" })
+	"tailwindcss", "ols", "sqls", "svelte", "astro", "jdtls" })
