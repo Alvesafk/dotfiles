@@ -1,4 +1,12 @@
 -- ui.lua has the setups and configs for the plugins that change the how the nvim UI looks.
+-- Only the snacks modules that don't overlap with the other plugins are enabled.
+require("snacks").setup({
+	quickfile = { enabled = true },
+	input = { enabled = true },
+	words = { enabled = true },
+	statuscolumn = { enabled = true },
+})
+
 require("notify").setup({
 	background_colour = "#000000",
 })
@@ -22,6 +30,18 @@ require("noice").setup({
 			enabled = false,
 		},
 	}
+})
+
+-- Shows the available keybinds (and their desc) after pressing a prefix like <leader>.
+require("which-key").setup({
+	spec = {
+		{ "<leader>c", group = "Code" },
+		{ "<leader>f", group = "Find" },
+		{ "<leader>g", group = "Git / Goto" },
+		{ "<leader>l", group = "LSP" },
+		{ "<leader>n", group = "No highlight" },
+		{ "<leader>t", group = "Toggle / Terminal" },
+	},
 })
 
 require("lualine").setup({})

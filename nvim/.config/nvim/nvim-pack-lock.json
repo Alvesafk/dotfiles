@@ -28,6 +28,10 @@
       "rev": "6eb90dd328d402ae8847635d0d6be0934bf65668",
       "src": "https://github.com/vieitesss/command.nvim"
     },
+    "conform.nvim": {
+      "rev": "016802de402556da54c36bd7359b441266b01cdd",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
     "diffview.nvim": {
       "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
       "src": "https://github.com/sindrets/diffview.nvim"
@@ -96,9 +100,19 @@
       "rev": "627f2e1cac91de0d1d4dd7472b506a30f41b2b7d",
       "src": "https://github.com/xero/miasma.nvim"
     },
+<<<<<<< HEAD
     "mini.tabline": {
       "rev": "7d4a8a79f37361ad287d27bda0f37fc53f924a50",
       "src": "https://github.com/nvim-mini/mini.tabline"
+=======
+    "mini.pairs": {
+      "rev": "03eb1f0062a2cee5314d1ac3939246e4bb21352e",
+      "src": "https://github.com/nvim-mini/mini.pairs"
+    },
+    "mini.surround": {
+      "rev": "5357f00aca51a3b43e7775901b1ad9699f8c2678",
+      "src": "https://github.com/nvim-mini/mini.surround"
+>>>>>>> 286eefc (nvim config update)
     },
     "monoglow.nvim": {
       "rev": "a249b1f55bfe9171e2f8aff7acf140f78ca4b2bb",
@@ -191,6 +205,10 @@
     "vim-wakatime": {
       "rev": "2a856d0b7863dc34ffc80647cb52fbd1319fe144",
       "src": "https://github.com/wakatime/vim-wakatime"
+    },
+    "which-key.nvim": {
+      "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
+      "src": "https://github.com/folke/which-key.nvim"
     }
   }
 }

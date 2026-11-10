@@ -81,5 +81,34 @@ require("command").setup()
 
 require("todo-comments").setup()
 
+-- Auto closes pairs ((), [], {}, quotes) and adds/deletes/replaces surroundings (sa, sd, sr...).
+require("mini.pairs").setup()
+require("mini.surround").setup()
+
 require("neogit").setup()
 require("gitsigns").setup()
+
+-- Formatting. oxfmt is resolved from the project's node_modules first and then from $PATH.
+-- Filetypes without a formatter here (go, rust, c, lua, svelte, astro...) fall back to the LSP.
+local oxfmt = { "oxfmt" }
+require("conform").setup({
+	formatters_by_ft = {
+		javascript = oxfmt,
+		javascriptreact = oxfmt,
+		typescript = oxfmt,
+		typescriptreact = oxfmt,
+		json = oxfmt,
+		jsonc = oxfmt,
+		css = oxfmt,
+		scss = oxfmt,
+		less = oxfmt,
+		html = oxfmt,
+		vue = oxfmt,
+		yaml = oxfmt,
+		markdown = oxfmt,
+		graphql = oxfmt,
+		odin = { "odinfmt" },
+	},
+	default_format_opts = { lsp_format = "fallback" },
+	format_on_save = { timeout_ms = 1000 },
+})

@@ -61,6 +61,10 @@ vim.pack.add({
 	{ src = "https://github.com/wakatime/vim-wakatime" },
 	{ src = "https://github.com/folke/todo-comments.nvim" },
 	{ src = "https://github.com/zaldih/themery.nvim" },
+	{ src = "https://github.com/stevearc/conform.nvim" },
+	{ src = "https://github.com/nvim-mini/mini.pairs" },
+	{ src = "https://github.com/nvim-mini/mini.surround" },
+	{ src = "https://github.com/folke/which-key.nvim" },
 
 	{ src = "https://codeberg.org/evergarden/nvim.git", name = "evergarden" },
 })

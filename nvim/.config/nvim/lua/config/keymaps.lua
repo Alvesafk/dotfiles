@@ -30,7 +30,9 @@ end, { desc = "Toggle wrap" })
 map({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to system clipboard" })
 map({ "n", "v" }, "<leader>d", '"+d', { desc = "Delete to system clipboard" })
 
-map("n", "<leader>lf", vim.lsp.buf.format, { desc = "LSP format" })
+map({ "n", "v" }, "<leader>lf", function()
+	require("conform").format({ async = true })
+end, { desc = "Format buffer/selection" })
 map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
 
 map("n", "<leader>tc", function()
@@ -51,9 +53,19 @@ map("n", "<leader>tt", "<cmd>Themery<CR>", { desc = "Theme picker" })
 map("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "Find TODOs" })
 map("n", "<leader>fl", "<cmd>TodoLocList<CR>", { desc = "TODOs in location list" })
 
+map({ "n", "t" }, "]]", function() Snacks.words.jump(vim.v.count1) end, { desc = "Next reference" })
+map({ "n", "t" }, "[[", function() Snacks.words.jump(-vim.v.count1) end, { desc = "Prev reference" })
+
 -- Git stuff
 map("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Neogit" })
 map("n", "<leader>gb", "<cmd>Gitsigns blame_line<CR>", { desc = "Git blame line" })
+map("n", "<leader>gv", function()
+	if require("diffview.lib").get_current_view() then
+		vim.cmd("DiffviewClose")
+	else
+		vim.cmd("DiffviewOpen")
+	end
+end, { desc = "Toggle Diffview" })
 
 -- Own functions based keymaps.
 map("n", "<leader>tp", theme.toggle_transparency, { desc = "Toggle transparency" })

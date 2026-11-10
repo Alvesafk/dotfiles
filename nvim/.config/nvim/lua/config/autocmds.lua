@@ -81,12 +81,12 @@ autocmd("FileType", {
 autocmd("LspAttach", {
 	group = augroup("config.lsp", { clear = true }),
 	callback = function(args)
-		local map = function(lhs, rhs)
-			vim.keymap.set("n", lhs, rhs, { buffer = args.buf })
+		local map = function(lhs, rhs, desc)
+			vim.keymap.set("n", lhs, rhs, { buffer = args.buf, desc = desc })
 		end
-		map("<leader>gd", vim.lsp.buf.definition)
-		map("<leader>gD", vim.lsp.buf.declaration)
-		map("<leader>gi", vim.lsp.buf.implementation)
+		map("<leader>gd", vim.lsp.buf.definition, "Go to definition")
+		map("<leader>gD", vim.lsp.buf.declaration, "Go to declaration")
+		map("<leader>gi", vim.lsp.buf.implementation, "Go to implementation")
 	end,
 })
 
