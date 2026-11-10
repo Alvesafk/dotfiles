@@ -1,0 +1,31 @@
+onboarding = false
+
+[theme]
+name = "kanagawa"
+auto_switch = false
+
+[terminal]
+# tmux: split-window -c "#{pane_current_path}"
+new_cwd = "follow"
+
+[keys]
+# tmux: set -g prefix C-Space
+prefix = "ctrl+space"
+
+# tmux: bind -n M-H previous-window / bind -n M-L next-window
+previous_tab = "alt+shift+h"
+next_tab = "alt+shift+l"
+
+# tmux: bind '"' split-window -v / bind % split-window -h
+split_horizontal = "prefix+\""
+split_vertical = "prefix+%"
+
+[ui]
+status_indicators = "symbols"
+# tmux: set -g mouse on
+mouse_capture = true
+# tmux-nova: whoami@host segment on the right
+tab_bar_right = [{ type = "hostname" }]
+
+[ui.toast]
+delivery = "system"
